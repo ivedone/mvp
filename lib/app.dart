@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mvp/screens/do_routine.dart';
 import 'package:mvp/theme/theme.dart';
+import 'package:mvp/util/seed.dart';
 
 class IvedoneApp extends StatelessWidget {
   const IvedoneApp({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class IvedoneApp extends StatelessWidget {
       title: 'ivedone',
       theme: activeTheme,
       debugShowCheckedModeBanner: false,
-      home: const DoRoutineOverlay(),
+      home: DoRoutineOverlay(routine: SeedRoutines.AbsInTwoWeeks),
     );
   }
 }

@@ -11,8 +11,12 @@ class TaskWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: const Center(child: CircularProgressIndicator()),
+      leading: const SizedBox(
+          width: 50,
+          height: 50,
+          child: Center(child: CircularProgressIndicator())),
       title: Text(task.title),
+      subtitle: Text(task.description ?? ''),
     );
   }
 }
