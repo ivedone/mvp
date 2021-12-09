@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:mvp/theme/theme.dart';
 
 enum TaskType {
   work,
   rest,
+}
+
+ThemeData getTaskTheme(TaskType type) {
+  switch (type) {
+    case TaskType.work:
+      return activeTheme;
+    case TaskType.rest:
+      return restTheme;
+  }
 }
 
 @immutable

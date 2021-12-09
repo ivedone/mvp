@@ -12,13 +12,16 @@ class TaskWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: ListTile(
-        leading: StaticCountdownWidget(
-            remaining: toMinutesAndSeconds(task.duration), percentDone: 1.0),
-        title: Text(task.title),
-        subtitle: Text(task.description ?? ''),
+    return Theme(
+      data: getTaskTheme(task.type),
+      child: InkWell(
+        onTap: () {},
+        child: ListTile(
+          leading: StaticCountdownWidget(
+              remaining: toMinutesAndSeconds(task.duration), percentDone: 1.0),
+          title: Text(task.title),
+          subtitle: Text(task.description ?? ''),
+        ),
       ),
     );
   }
