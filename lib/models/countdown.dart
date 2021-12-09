@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvp/models/task.dart';
+import 'package:mvp/util/clock_format.dart';
 
 @immutable
 class OffsetAmounts {
@@ -37,6 +38,7 @@ class CountdownModel with ChangeNotifier {
   Duration get _diff => duration - elapsed;
   bool get isDone => _diff.compareTo(Duration.zero) < 1;
   Duration get remaining => isDone ? Duration.zero : _diff;
+  String get remainingString => toMinutesAndSeconds(remaining);
 
   CountdownModel start() {
     stopwatch.start();
