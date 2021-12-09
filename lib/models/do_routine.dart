@@ -8,10 +8,10 @@ enum DoRoutineActionTypes {
   clearRoutine,
   start,
   stop,
+  restart,
   skipForward,
   skipBack,
   selectTaskAtIndex,
-  restart,
   skipForward5Sec,
   skipBack5Sec,
 }
@@ -23,6 +23,10 @@ class DoRoutineModel extends ChangeNotifier {
 
   final CountdownModel _countdown;
   DoRoutineModel({required CountdownModel countdown}) : _countdown = countdown;
+
+  start() {}
+  stop() {}
+  restart() {}
 
   DoRoutineModel selectRoutine(RoutineModel routine) {
     _routine = routine;
@@ -38,10 +42,14 @@ class DoRoutineModel extends ChangeNotifier {
     return this;
   }
 
-  DoRoutineModel selectTaskAtIndex(int i) {
+  DoRoutineModel selectTaskAtIndex(int i,
+      {Duration startElapsed = Duration.zero}) {
     if (isValidIndex(i)) {
       _index = i;
-      _countdown.selectTask(currentTask!);
+      _countdown.selectTask(
+        currentTask!,
+        startElapsed: startElapsed,
+      );
       notifyListeners();
     }
     return this;
@@ -53,32 +61,51 @@ class DoRoutineModel extends ChangeNotifier {
   int get length => hasRoutine ? routine!.length : 0;
   bool isValidIndex(int i) => routine?.isValidIndex(i) ?? false;
   TaskModel? get currentTask => routine?.atIndex(index);
+  bool get hasTask => currentTask != null;
   bool get isDone => index >= length;
 
   bool get isLast => isValidIndex(index) && index == length - 1;
   bool get hasNext => isValidIndex(index) && !isLast;
-  DoRoutineModel skipForward() {
+  DoRoutineModel skipForward({Duration startElapsed = Duration.zero}) {
     if (isValidIndex(index)) {
       _index++;
       if (isDone) {
         _countdown.clearTask();
       } else {
-        _countdown.selectTask(currentTask!);
+        _countdown.selectTask(currentTask!, startElapsed: startElapsed);
       }
       notifyListeners();
     }
     return this;
   }
 
-  DoRoutineModel skipBack() {
+  DoRoutineModel skipBack({Duration offset = Duration.zero}) {
     if (isValidIndex(index)) {
       if (index == 0) {
         _countdown.restart();
       } else {
         _index--;
-        _countdown.selectTask(currentTask!);
+        final TaskModel task = currentTask!;
+        _countdown.selectTask(task, startElapsed: task.duration + offset);
       }
       notifyListeners();
+    }
+    return this;
+  }
+
+  DoRoutineModel skipForward5Sec() {
+    _countdown.offsetBy(OffsetAmounts.fiveSeconds);
+    while (_countdown.hasTask && _countdown.didSkipPastTask) {
+      skipForward(startElapsed: _countdown.excessSkippedPast);
+    }
+    notifyListeners();
+    return this;
+  }
+
+  DoRoutineModel skipBack5Sec() {
+    _countdown.offsetBy(OffsetAmounts.negFiveSeconds);
+    while (_countdown.hasTask && _countdown.didSkipBeforeTask) {
+      skipBack(offset: _countdown.excessSkippedBefore);
     }
     return this;
   }

@@ -14,9 +14,9 @@ class CountdownModel with ChangeNotifier {
 
   CountdownModel selectTask(TaskModel task,
       {Duration startElapsed = Duration.zero}) {
+    restart();
     _task = task;
     _offset = startElapsed;
-    restart();
     return this;
   }
 
