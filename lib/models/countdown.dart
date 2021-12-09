@@ -12,8 +12,10 @@ class CountdownModel with ChangeNotifier {
   TaskModel? get task => _task;
   bool get hasTask => task != null;
 
-  CountdownModel selectTask(TaskModel task) {
+  CountdownModel selectTask(TaskModel task,
+      {Duration startElapsed = Duration.zero}) {
     _task = task;
+    _offset = startElapsed;
     restart();
     return this;
   }

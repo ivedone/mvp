@@ -17,4 +17,12 @@ class RoutineModel {
     required this.creator,
     required List<TaskModel> tasks,
   }) : _tasks = tasks;
+
+  bool isValidIndex(int i) => 0 <= i && i < length;
+
+  TaskModel? atIndex(int i) {
+    if (isValidIndex(i)) {
+      return _tasks[i];
+    }
+  }
 }
