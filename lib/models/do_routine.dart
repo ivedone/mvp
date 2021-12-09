@@ -1,32 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:mvp/models/countdown.dart';
 import 'package:mvp/models/routine.dart';
 import 'package:mvp/models/task.dart';
-
-enum DoRoutineActionTypes {
-  selectRoutine,
-  clearRoutine,
-  start,
-  stop,
-  restart,
-  skipForward,
-  skipBack,
-  selectTaskAtIndex,
-  skipForward5Sec,
-  skipBack5Sec,
-}
 
 class DoRoutineModel extends ChangeNotifier {
   RoutineModel? _routine;
   RoutineModel? get routine => _routine;
   bool get hasRoutine => routine != null;
 
+  late final Ticker _ticker;
+  bool get isRunning => _ticker.isActive;
+  bool get isPaused => !isRunning;
   final CountdownModel _countdown;
-  DoRoutineModel({required CountdownModel countdown}) : _countdown = countdown;
+  DoRoutineModel({required CountdownModel countdown}) : _countdown = countdown {
+    _initTicker();
+  }
 
-  start() {}
-  stop() {}
-  restart() {}
+  void _initTicker() {
+    _ticker = Ticker(_onTick);
+  }
+
+  DoRoutineModel start() {
+    _ticker.start();
+    _countdown.start();
+    notifyListeners();
+    return this;
+  }
+
+  DoRoutineModel stop() {
+    _ticker.stop();
+    _countdown.stop();
+    notifyListeners();
+    return this;
+  }
+
+  DoRoutineModel toggle() {
+    if (isRunning) {
+      stop();
+    } else {
+      start();
+    }
+    return this;
+  }
+
+  DoRoutineModel restart() {
+    selectTaskAtIndex(0);
+    return this;
+  }
 
   DoRoutineModel selectRoutine(RoutineModel routine) {
     _routine = routine;
@@ -108,5 +129,14 @@ class DoRoutineModel extends ChangeNotifier {
       skipBack(offset: _countdown.excessSkippedBefore);
     }
     return this;
+  }
+
+  void _onTick(_) {
+    if (!hasRoutine || isDone) {
+      stop();
+    } else if (_countdown.isDone) {
+      skipForward(startElapsed: _countdown.excessSkippedPast);
+    }
+    notifyListeners();
   }
 }
