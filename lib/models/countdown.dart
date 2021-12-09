@@ -15,4 +15,26 @@ class CountdownModel with ChangeNotifier {
     _task = null;
     notifyListeners();
   }
+
+  final Stopwatch stopwatch = Stopwatch();
+  bool get isRunning => stopwatch.isRunning;
+  bool get isPaused => !isRunning;
+
+  void start() {
+    stopwatch.start();
+    notifyListeners();
+  }
+
+  void stop() {
+    stopwatch.stop();
+    notifyListeners();
+  }
+
+  void toggle() {
+    if (isRunning) {
+      stop();
+    } else {
+      start();
+    }
+  }
 }
