@@ -16,6 +16,13 @@ void main() {
       countdown.clearTask();
     });
 
+    test('.start() increases elapsed', () async {
+      countdown.start();
+      await Future.delayed(const Duration(seconds: 1), () {
+        expect(countdown.elapsed.inMilliseconds, greaterThan(0));
+      });
+    });
+
     test('.complete() finishes the countdown', () {
       expect(countdown.isDone, false);
       countdown.complete();

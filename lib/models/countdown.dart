@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mvp/models/task.dart';
 
-enum CountdownActionTypes {
-  selectTask,
-  clearTask,
-  start,
-  stop,
-  toggle,
-  restart,
-  complete,
-  skipForward5Sec,
-  skipBack5Sec,
+@immutable
+class OffsetAmounts {
+  static const fiveSeconds = Duration(seconds: 5);
+  static const negFiveSeconds = Duration(seconds: -5);
 }
 
 class CountdownModel with ChangeNotifier {
@@ -20,7 +14,7 @@ class CountdownModel with ChangeNotifier {
 
   CountdownModel selectTask(TaskModel task) {
     _task = task;
-    notifyListeners();
+    restart();
     return this;
   }
 
@@ -73,6 +67,20 @@ class CountdownModel with ChangeNotifier {
 
   CountdownModel complete() {
     _offset += remaining;
+    notifyListeners();
+    return this;
+  }
+
+  bool get didSkipPastTask => isDone;
+  Duration get excessSkippedPast =>
+      didSkipPastTask ? elapsed - duration : Duration.zero;
+
+  bool get didSkipBeforeTask => elapsed.isNegative;
+  Duration get excessSkippedBefore =>
+      didSkipBeforeTask ? elapsed : Duration.zero;
+
+  CountdownModel offsetBy(Duration offset) {
+    _offset += offset;
     notifyListeners();
     return this;
   }
