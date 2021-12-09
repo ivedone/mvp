@@ -12,7 +12,7 @@ class IvedoneApp extends StatelessWidget {
       title: 'ivedone',
       theme: activeTheme,
       debugShowCheckedModeBanner: false,
-      home: DoRoutineOverlay(routine: SeedRoutines.AbsInTwoWeeks),
+      home: DoRoutineModal(routine: SeedRoutines.AbsInTwoWeeks),
     );
   }
 }

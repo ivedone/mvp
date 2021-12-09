@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mvp/components/do_routine/list.dart';
 import 'package:mvp/models/routine.dart';
 
-class DoRoutineOverlay extends StatelessWidget {
+class DoRoutineModal extends StatelessWidget {
   final RoutineModel routine;
-  const DoRoutineOverlay({
+  const DoRoutineModal({
     Key? key,
     required this.routine,
   }) : super(key: key);
@@ -12,6 +12,7 @@ class DoRoutineOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
           leading: IconButton(
             icon: const Icon(Icons.expand_more),
