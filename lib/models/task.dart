@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:mvp/theme/theme.dart';
 
+enum TaskState {
+  idle,
+  active,
+  done,
+}
+
+TaskState getTaskState(int taskIndex, int currentIndex) {
+  if (currentIndex < taskIndex) {
+    return TaskState.idle;
+  } else if (currentIndex == taskIndex) {
+    return TaskState.active;
+  } else {
+    return TaskState.done;
+  }
+}
+
 enum TaskType {
   work,
   rest,
