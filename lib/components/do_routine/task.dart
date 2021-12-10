@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mvp/models/do_routine.dart';
-import 'package:mvp/models/task.dart';
-import 'package:mvp/util/clock_format.dart';
 import 'package:provider/provider.dart';
-import 'countdown.dart/static.dart';
+import 'package:mvp/models/do_routine.dart';
+import 'package:mvp/components/do_routine/countdown.dart/countdown.dart';
+import 'package:mvp/models/task.dart';
 
 class TaskWidget extends StatelessWidget {
   final TaskModel task;
@@ -37,10 +36,14 @@ class TaskWidget extends StatelessWidget {
           return getTaskState(index, currentIndex);
         }, builder: (_, TaskState taskState, __) {
           return ListTile(
-            leading: StaticCountdownWidget(
-                remaining: toMinutesAndSeconds(task.duration),
-                percentDone: 1.0),
-            title: Text(task.title, style: _getTitleStyle(taskState, theme)),
+            leading: CountdownWidget(
+              duration: task.duration,
+              taskState: taskState,
+            ),
+            title: Text(
+              task.title,
+              style: _getTitleStyle(taskState, theme),
+            ),
             subtitle: Text(task.description ?? ''),
           );
         }),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mvp/util/clock_format.dart';
 
 class StaticCountdownWidget extends StatelessWidget {
-  final String remaining;
+  final Duration remaining;
   final double percentDone;
 
   const StaticCountdownWidget({
@@ -34,7 +35,7 @@ class StaticCountdownWidget extends StatelessWidget {
                 )),
           ),
           Center(
-              child: Text(remaining,
+              child: Text(toMinutesAndSeconds(remaining),
                   style: TextStyle(
                       color: Theme.of(context).colorScheme.onSecondary)))
         ],

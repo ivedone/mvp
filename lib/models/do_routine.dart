@@ -71,7 +71,7 @@ class DoRoutineModel extends ChangeNotifier {
         currentTask!,
         startElapsed: startElapsed,
       );
-      notifyListeners();
+      start();
     }
     return this;
   }
