@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mvp/components/do_routine/countdown.dart/animated.dart';
 import 'package:mvp/components/do_routine/countdown.dart/static.dart';
 import 'package:mvp/models/task.dart';
 
@@ -20,10 +21,7 @@ class CountdownWidget extends StatelessWidget {
           percentDone: 1.0,
         );
       case TaskState.active:
-        return StaticCountdownWidget(
-          remaining: duration - Duration(seconds: duration.inSeconds ~/ 2),
-          percentDone: 0.5,
-        );
+        return const AnimatedCountdownWidget();
       case TaskState.done:
         return const StaticCountdownWidget(
           remaining: Duration.zero,

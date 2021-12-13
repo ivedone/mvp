@@ -27,12 +27,11 @@ class StaticCountdownWidget extends StatelessWidget {
                   color: Theme.of(context).colorScheme.primaryVariant,
                 ),
                 child: CircularProgressIndicator(
-                  strokeWidth: 5.0,
-                  value: percentDone,
-                  semanticsLabel: 'Task progress',
-                  color: Theme.of(context).colorScheme.secondary,
-                  backgroundColor: Colors.transparent,
-                )),
+                    strokeWidth: 5.0,
+                    value: percentDone,
+                    semanticsLabel: 'Task progress',
+                    color: Theme.of(context).colorScheme.secondary,
+                    backgroundColor: Colors.transparent)),
           ),
           Center(
               child: Text(toMinutesAndSeconds(remaining),

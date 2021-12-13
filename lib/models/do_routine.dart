@@ -132,11 +132,11 @@ class DoRoutineModel extends ChangeNotifier {
   }
 
   void _onTick(_) {
+    _countdown.notifyListeners();
     if (!hasRoutine || isDone) {
       stop();
     } else if (_countdown.isDone) {
       skipForward(startElapsed: _countdown.excessSkippedPast);
     }
-    notifyListeners();
   }
 }

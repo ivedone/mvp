@@ -40,6 +40,8 @@ class CountdownModel with ChangeNotifier {
   Duration get remaining => isDone ? Duration.zero : _diff;
   String get remainingString => toMinutesAndSeconds(remaining);
 
+  double get percentDone => elapsed.inMilliseconds / duration.inMilliseconds;
+
   CountdownModel start() {
     stopwatch.start();
     notifyListeners();
