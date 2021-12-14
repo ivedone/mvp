@@ -16,17 +16,12 @@ class CountdownWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (taskState) {
       case TaskState.idle:
-        return StaticCountdownWidget(
-          remaining: duration,
-          percentDone: 1.0,
-        );
+        return StaticCountdownWidget(remaining: duration, percentDone: 1.0);
       case TaskState.active:
         return const AnimatedCountdownWidget();
       case TaskState.done:
         return const StaticCountdownWidget(
-          remaining: Duration.zero,
-          percentDone: 0.0,
-        );
+            remaining: Duration.zero, percentDone: 0.0);
     }
   }
 }

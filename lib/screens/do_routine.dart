@@ -18,20 +18,17 @@ class DoRoutineFullScreenModal extends StatelessWidget {
             backgroundColor: Theme.of(context).colorScheme.background,
             appBar: AppBar(
                 leading: IconButton(
-                  icon: const Icon(Icons.expand_more),
-                  onPressed: () {},
-                ),
+                    icon: const Icon(Icons.expand_more), onPressed: () {}),
                 title: Selector<DoRoutineModel, String>(
-                  selector: (_, DoRoutineModel doRoutine) =>
-                      doRoutine.routine!.title,
-                  builder: (BuildContext context, String title, _) =>
-                      Text(title, style: Theme.of(context).textTheme.subtitle1),
-                ),
+                    selector: (_, DoRoutineModel doRoutine) =>
+                        doRoutine.routine!.title,
+                    builder: (BuildContext context, String title, _) => Text(
+                        title,
+                        style: Theme.of(context).textTheme.subtitle1)),
                 actions: [
                   IconButton(
-                    icon: const Icon(Icons.more_horiz_outlined),
-                    onPressed: () {},
-                  ),
+                      icon: const Icon(Icons.more_horiz_outlined),
+                      onPressed: () {})
                 ]),
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
