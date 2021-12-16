@@ -34,6 +34,7 @@ class DoRoutineFullScreenModal extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 /// DoRoutineDetailWidget
+                /// TODO: Make DoRoutineDetailWidget resiazable as window size changes
                 SizedBox(
                     height: MediaQuery.of(context).size.height / 3,
                     child: Container(
