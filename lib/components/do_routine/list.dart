@@ -52,7 +52,7 @@ class _DoRoutineListWidgetState extends State<DoRoutineListWidget> {
             builder: (BuildContext listContext, int currentIndex, __) {
               final int length = routine.length;
               final double spacerHeight =
-                  2 * MediaQuery.of(listContext).size.height / 3;
+                  2 * MediaQuery.of(listContext).size.height / 3 - 120;
               return Expanded(
                   child: ScrollablePositionedList.builder(
                       itemScrollController: itemScrollController,
