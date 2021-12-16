@@ -20,15 +20,14 @@ class _DoRoutineListWidgetState extends State<DoRoutineListWidget> {
   void scrollToIndex(int index) {
     itemScrollController.scrollTo(
         index: index,
-        duration: const Duration(milliseconds: 700),
+        duration: const Duration(milliseconds: 1500),
         curve: Curves.easeInOutCubic);
   }
 
   @override
   void initState() {
     super.initState();
-    late final int index =
-        Provider.of<DoRoutineModel>(context, listen: false).index;
+    final int index = Provider.of<DoRoutineModel>(context, listen: false).index;
     initialScrollIndex = index;
     prevIndex = index;
   }
@@ -36,9 +35,9 @@ class _DoRoutineListWidgetState extends State<DoRoutineListWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final int index = Provider.of<DoRoutineModel>(context).index;
-    if (prevIndex != index) {
-      // print('didChangeD: $index');
+    final DoRoutineModel doRoutine = Provider.of<DoRoutineModel>(context);
+    final int index = doRoutine.index;
+    if (doRoutine.isValidIndex(index) && prevIndex != doRoutine.index) {
       scrollToIndex(index);
       prevIndex = index;
     }
@@ -50,14 +49,20 @@ class _DoRoutineListWidgetState extends State<DoRoutineListWidget> {
         selector: (_, DoRoutineModel doRoutine) => doRoutine.routine!,
         builder: (_, RoutineModel routine, __) => Selector<DoRoutineModel, int>(
             selector: (_, DoRoutineModel doRoutine) => doRoutine.index,
-            builder: (BuildContext context, int currentIndex, __) {
+            builder: (BuildContext listContext, int currentIndex, __) {
+              final int length = routine.length;
+              final double spacerHeight =
+                  2 * MediaQuery.of(listContext).size.height / 3;
               return Expanded(
                   child: ScrollablePositionedList.builder(
                       itemScrollController: itemScrollController,
-                      itemCount: routine.length,
+                      itemCount: length + 1,
                       initialScrollIndex: initialScrollIndex,
                       shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int taskIndex) {
+                      itemBuilder: (BuildContext itemContext, int taskIndex) {
+                        if (taskIndex == length) {
+                          return SizedBox(height: spacerHeight);
+                        }
                         return TaskWidget(
                             taskIndex: taskIndex,
                             task: routine.atIndex(taskIndex)!);
