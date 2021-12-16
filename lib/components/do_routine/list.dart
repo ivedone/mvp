@@ -17,7 +17,8 @@ class DoRoutineListWidget extends StatelessWidget {
             return ListView.builder(
               itemCount: routine.length,
               itemBuilder: (BuildContext context, int taskIndex) {
-                return TaskWidget(taskIndex: taskIndex);
+                return TaskWidget(
+                    taskIndex: taskIndex, task: routine.atIndex(taskIndex)!);
               },
             );
           }),

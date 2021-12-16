@@ -6,9 +6,11 @@ import 'package:mvp/models/task.dart';
 
 class TaskWidget extends StatelessWidget {
   final int taskIndex;
+  final TaskModel task;
   const TaskWidget({
     Key? key,
     required this.taskIndex,
+    required this.task,
   }) : super(key: key);
 
   TextStyle _getTitleStyle(TaskState taskState, ThemeData theme) {
@@ -25,7 +27,6 @@ class TaskWidget extends StatelessWidget {
         Provider.of<DoRoutineModel>(context, listen: false);
     final DoRoutineModel Function(int) selectTaskAtIndex =
         doRoutine.selectTaskAtIndex;
-    final TaskModel task = doRoutine.atIndex(taskIndex);
     final ThemeData theme = getTaskTheme(task.type);
     return Theme(
         data: theme,
