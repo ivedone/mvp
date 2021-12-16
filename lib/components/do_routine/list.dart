@@ -1,30 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:mvp/components/do_routine/task.dart';
 import 'package:mvp/models/do_routine.dart';
 import 'package:mvp/models/routine.dart';
-import 'package:mvp/models/task.dart';
-import 'package:provider/provider.dart';
 
-class DoRoutineListWidget extends StatelessWidget {
+class DoRoutineListWidget extends StatefulWidget {
   const DoRoutineListWidget({Key? key}) : super(key: key);
+
+  @override
+  _DoRoutineListWidgetState createState() => _DoRoutineListWidgetState();
+}
+
+class _DoRoutineListWidgetState extends State<DoRoutineListWidget> {
+  final ItemScrollController itemScrollController = ItemScrollController();
+  late final int initialScrollIndex;
+  late int prevIndex;
+
+  void scrollToIndex(int index) {
+    itemScrollController.scrollTo(
+        index: index,
+        duration: const Duration(milliseconds: 1500),
+        curve: Curves.easeInOutCubic);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    final int index = Provider.of<DoRoutineModel>(context, listen: false).index;
+    initialScrollIndex = index;
+    prevIndex = index;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final DoRoutineModel doRoutine = Provider.of<DoRoutineModel>(context);
+    final int index = doRoutine.index;
+    if (doRoutine.isValidIndex(index) && prevIndex != doRoutine.index) {
+      scrollToIndex(index);
+      prevIndex = index;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Selector<DoRoutineModel, RoutineModel>(
         selector: (_, DoRoutineModel doRoutine) => doRoutine.routine!,
-        builder: (BuildContext context, RoutineModel routine, _) {
-          return ListView.builder(
-            itemCount: routine.length,
-            itemBuilder: (BuildContext context, int index) {
-              final TaskModel task = routine.tasks[index];
-              final String valueKey = <dynamic>[task.id, task.title].join('#');
-              return TaskWidget(
-                key: ValueKey(valueKey),
-                task: task,
-                index: index,
-              );
-            },
-          );
-        });
+        builder: (_, RoutineModel routine, __) => Selector<DoRoutineModel, int>(
+            selector: (_, DoRoutineModel doRoutine) => doRoutine.index,
+            builder: (BuildContext listContext, int currentIndex, __) {
+              final int length = routine.length;
+              final double spacerHeight =
+                  2 * MediaQuery.of(listContext).size.height / 3 - 120;
+              return Expanded(
+                  child: ScrollablePositionedList.builder(
+                      itemScrollController: itemScrollController,
+                      itemCount: length + 1,
+                      initialScrollIndex: initialScrollIndex,
+                      shrinkWrap: true,
+                      itemBuilder: (BuildContext itemContext, int taskIndex) {
+                        if (taskIndex == length) {
+                          return SizedBox(height: spacerHeight);
+                        }
+                        return TaskWidget(
+                            taskIndex: taskIndex,
+                            task: routine.atIndex(taskIndex)!);
+                      }));
+            }));
   }
 }

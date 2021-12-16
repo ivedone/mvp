@@ -39,13 +39,12 @@ class TaskModel {
   final String? description;
   final Duration duration;
 
-  const TaskModel({
-    this.id,
-    required this.type,
-    required this.title,
-    this.description,
-    required this.duration,
-  });
+  const TaskModel(
+      {this.id,
+      required this.type,
+      required this.title,
+      this.description,
+      required this.duration});
 
   factory TaskModel.work({
     int? id,

@@ -35,6 +35,10 @@ class DoRoutineModel extends ChangeNotifier {
     return this;
   }
 
+  TaskModel atIndex(int i) {
+    return _routine!.atIndex(i)!;
+  }
+
   DoRoutineModel toggle() {
     if (isRunning) {
       stop();
@@ -71,7 +75,8 @@ class DoRoutineModel extends ChangeNotifier {
         currentTask!,
         startElapsed: startElapsed,
       );
-      start();
+      if (isPaused) start();
+      notifyListeners();
     }
     return this;
   }

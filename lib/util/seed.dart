@@ -14,20 +14,20 @@ class SeedTasks {
       title: 'Dead Bugs',
       description:
           'Complete reps on one side, then switch. 12 total reps. Exhale as you sit back into your hips',
-      seconds: 30);
+      seconds: 3);
 
   static TaskModel RussianTwists({int? id}) => TaskModel.work(
       id: id,
       title: 'Russian Twists',
-      seconds: 30,
+      seconds: 3,
       description:
           'Alternate side to side. Aim to increase range with every rep.');
 
   static TaskModel Plank({int? id}) =>
-      TaskModel.work(id: id, title: 'Plank', seconds: 60);
+      TaskModel.work(id: id, title: 'Plank', seconds: 6);
 
   static TaskModel OneMinuteRest({int? id}) =>
-      TaskModel.rest(id: id, seconds: 60);
+      TaskModel.rest(id: id, seconds: 6);
 }
 
 class BuildTasks {
