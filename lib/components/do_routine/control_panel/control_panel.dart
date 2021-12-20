@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mvp/components/do_routine/control_panel/progress.dart';
+import 'package:mvp/components/progress/progress.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mvp/models/do_routine.dart';
@@ -29,6 +29,8 @@ class ControlPanelWidget extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      // const LinearProgressIndicator(
+                      //     value: null, color: Colors.white),
                       const DoRoutineProgressIndicator(),
                       _divider(context),
                       Expanded(
