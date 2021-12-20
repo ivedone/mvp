@@ -1,18 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:mvp/components/control_panel/toggle.dart';
+import 'package:provider/provider.dart';
+
+import 'package:mvp/models/do_routine.dart';
 import 'package:mvp/screens/do_routine.dart';
+
+import 'text.dart';
+import 'thumbnail.dart';
 
 class ControlPanelWidget extends StatelessWidget {
   const ControlPanelWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    bool hasRoutine = Provider.of<DoRoutineModel>(context).hasRoutine;
+    if (!hasRoutine) return Container();
+
     return SizedBox(
         height: 50,
         child: GestureDetector(
             child: DecoratedBox(
-                child: const Center(child: Text('ControlPanelWidget')),
                 decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary)),
+                    color: Theme.of(context).colorScheme.primaryVariant),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const LinearProgressIndicator(
+                          value: null,
+                          color: Colors.white,
+                          backgroundColor: Colors.black),
+                      Divider(
+                          height: 2,
+                          color: Theme.of(context).colorScheme.primary),
+                      Expanded(
+                          child: Row(children: const [
+                        ControlPanelThumbnail(),
+                        ControlPanelText(),
+                        ControlPanelToggleButton(),
+                      ])),
+                      Divider(
+                          height: 2,
+                          color: Theme.of(context).colorScheme.primary),
+                    ])),
             onTap: () {
               showGeneralDialog(
                   context: context,
