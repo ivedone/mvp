@@ -18,7 +18,10 @@ class DoRoutineFullScreenModal extends StatelessWidget {
             backgroundColor: Theme.of(context).colorScheme.background,
             appBar: AppBar(
                 leading: IconButton(
-                    icon: const Icon(Icons.expand_more), onPressed: () {}),
+                    icon: const Icon(Icons.expand_more),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    }),
                 title: Selector<DoRoutineModel, String>(
                     selector: (_, DoRoutineModel doRoutine) =>
                         doRoutine.routine!.title,
