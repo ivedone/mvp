@@ -86,8 +86,8 @@ class DoRoutineModel extends ChangeNotifier {
   int get index => _index;
   int get length => hasRoutine ? routine!.length : 0;
   bool isValidIndex(int i) => routine?.isValidIndex(i) ?? false;
+  bool get hasTask => isValidIndex(index);
   TaskModel? get currentTask => routine?.atIndex(index);
-  bool get hasTask => currentTask != null;
   bool get isDone => index >= length;
 
   bool get isLast => isValidIndex(index) && index == length - 1;
@@ -144,4 +144,6 @@ class DoRoutineModel extends ChangeNotifier {
       skipForward(startElapsed: _countdown.excessSkippedPast);
     }
   }
+
+  bool get shouldNotRender => isDone || !hasRoutine || !hasTask;
 }

@@ -17,8 +17,9 @@ class ControlPanelWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool hasRoutine = Provider.of<DoRoutineModel>(context).hasRoutine;
-    if (!hasRoutine) return Container();
+    final bool shouldNotRender =
+        Provider.of<DoRoutineModel>(context).shouldNotRender;
+    if (shouldNotRender) return Container();
 
     return SizedBox(
         height: 50,
