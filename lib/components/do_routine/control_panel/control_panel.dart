@@ -29,8 +29,6 @@ class ControlPanelWidget extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      // const LinearProgressIndicator(
-                      //     value: null, color: Colors.white),
                       const DoRoutineProgressIndicator(),
                       _divider(context),
                       Expanded(

@@ -57,6 +57,8 @@ class _ControlPanelToggleButtonState extends State<ControlPanelToggleButton>
   @override
   Widget build(BuildContext context) {
     return IconButton(
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
         onPressed: toggle,
         icon: AnimatedIcon(
             icon: wasPausedOnInit

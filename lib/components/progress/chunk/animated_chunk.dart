@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mvp/components/progress/chunk/static_chunk.dart';
-import 'package:mvp/models/countdown.dart';
-import 'package:mvp/models/do_routine.dart';
 import 'package:provider/provider.dart';
+
+import 'package:mvp/models/countdown.dart';
+
+import 'static_chunk.dart';
 
 class AnimatedProgressChunk extends StatelessWidget {
   const AnimatedProgressChunk({Key? key}) : super(key: key);
