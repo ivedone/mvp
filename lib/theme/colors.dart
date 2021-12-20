@@ -4,7 +4,7 @@ final ColorScheme activeColorScheme = ColorScheme(
   primary: Colors.black,
   primaryVariant: Colors.grey.shade900,
   secondary: Colors.red.shade300,
-  secondaryVariant: Colors.red.shade600,
+  secondaryVariant: Colors.red.shade700,
   surface: const Color.fromRGBO(0, 0, 0, 0.75),
   background: Colors.black,
   error: Colors.red.shade700,
@@ -17,11 +17,11 @@ final ColorScheme activeColorScheme = ColorScheme(
 );
 
 final ColorScheme getReadyColorScheme = activeColorScheme.copyWith(
-  secondary: Colors.yellow.shade300,
-  secondaryVariant: Colors.yellow.shade600,
+  secondary: Colors.yellow.shade500,
+  secondaryVariant: Colors.yellow.shade700,
 );
 
 final ColorScheme restColorScheme = activeColorScheme.copyWith(
-  secondary: Colors.blue.shade300,
-  secondaryVariant: Colors.blue.shade600,
+  secondary: Colors.blue.shade500,
+  secondaryVariant: Colors.blue.shade700,
 );

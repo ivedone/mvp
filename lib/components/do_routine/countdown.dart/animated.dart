@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mvp/models/do_routine.dart';
 import 'package:provider/provider.dart';
+
+import 'package:mvp/models/do_routine.dart';
 import 'package:mvp/models/countdown.dart';
 
 class AnimatedCountdownWidget extends StatelessWidget {
