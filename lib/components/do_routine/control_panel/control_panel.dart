@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:mvp/components/control_panel/toggle.dart';
+import 'package:mvp/components/do_routine/control_panel/progress.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mvp/models/do_routine.dart';
 import 'package:mvp/screens/do_routine.dart';
 
-import 'text.dart';
 import 'thumbnail.dart';
+import 'text.dart';
+import 'toggle.dart';
 
 class ControlPanelWidget extends StatelessWidget {
   const ControlPanelWidget({Key? key}) : super(key: key);
+
+  Widget _divider(BuildContext context) =>
+      Divider(height: 2, color: Theme.of(context).colorScheme.primary);
 
   @override
   Widget build(BuildContext context) {
@@ -25,22 +29,15 @@ class ControlPanelWidget extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const LinearProgressIndicator(
-                          value: null,
-                          color: Colors.white,
-                          backgroundColor: Colors.black),
-                      Divider(
-                          height: 2,
-                          color: Theme.of(context).colorScheme.primary),
+                      const DoRoutineProgressIndicator(),
+                      _divider(context),
                       Expanded(
                           child: Row(children: const [
                         ControlPanelThumbnail(),
                         ControlPanelText(),
                         ControlPanelToggleButton(),
                       ])),
-                      Divider(
-                          height: 2,
-                          color: Theme.of(context).colorScheme.primary),
+                      _divider(context),
                     ])),
             onTap: () {
               showGeneralDialog(

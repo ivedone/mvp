@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mvp/components/control_panel/control_panel.dart';
+import 'package:mvp/components/do_routine/control_panel/control_panel.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
