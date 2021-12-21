@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:mvp/models/do_routine.dart';
 import 'package:mvp/components/do_routine/list.dart';
-import 'package:mvp/components/do_routine/detail.dart';
+import 'package:mvp/components/do_routine/detail/detail.dart';
 
 class DoRoutineFullScreenModal extends StatelessWidget {
   const DoRoutineFullScreenModal({
