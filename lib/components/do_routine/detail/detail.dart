@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mvp/components/do_routine/progress/progress.dart';
+
+import 'clock.dart';
 
 class DoRoutineDetailWidget extends StatelessWidget {
   const DoRoutineDetailWidget({Key? key}) : super(key: key);
@@ -11,13 +12,8 @@ class DoRoutineDetailWidget extends StatelessWidget {
         height: height,
         child: Container(
             color: Theme.of(context).colorScheme.primaryVariant,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SizedBox(
-                      height: 20, child: Container(color: Colors.grey[700])),
-                  Expanded(child: Center(child: Text('DoRoutineDetailWidget'))),
-                  DoRoutineProgressIndicator(),
-                ])));
+            child: Stack(children: [
+              DoRoutineDetailClock(),
+            ])));
   }
 }
