@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'clock.dart';
+import 'text.dart';
 import 'controls.dart';
 
 class DoRoutineDetailWidget extends StatelessWidget {
@@ -15,7 +15,7 @@ class DoRoutineDetailWidget extends StatelessWidget {
             // color: Theme.of(context).colorScheme.primaryVariant,
             color: Colors.transparent,
             child: Stack(children: [
-              DoRoutineDetailClock(),
+              DoRoutineDetailText(),
               DoRoutineDetailControls(),
             ])));
   }
