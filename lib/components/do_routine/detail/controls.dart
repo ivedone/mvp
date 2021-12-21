@@ -17,7 +17,7 @@ class _DoRoutineDetailControlsState extends State<DoRoutineDetailControls> {
     return GestureDetector(
         child: Center(
             child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,

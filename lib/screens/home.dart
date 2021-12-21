@@ -18,6 +18,7 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: Theme.of(context).colorScheme.primaryVariant,
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+            BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Create'),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
           ]),
     );

@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:mvp/models/countdown.dart';
 import 'package:mvp/models/routine.dart';
 import 'package:mvp/models/task.dart';
+import 'package:mvp/util/clock_format.dart';
 
 class DoRoutineModel extends ChangeNotifier {
   RoutineModel? _routine;
@@ -75,6 +76,7 @@ class DoRoutineModel extends ChangeNotifier {
         currentTask!,
         startElapsed: startElapsed,
       );
+      _calculatePrevElapsed();
       if (isPaused) start();
       notifyListeners();
     }
@@ -92,6 +94,26 @@ class DoRoutineModel extends ChangeNotifier {
 
   bool get isLast => isValidIndex(index) && index == length - 1;
   bool get hasNext => isValidIndex(index) && !isLast;
+
+  Duration _prevElapsed = Duration.zero;
+  Duration get elapsed =>
+      hasTask ? _prevElapsed + _countdown.elapsed : Duration.zero;
+  String get elapsedString => toMinutesAndSeconds(elapsed);
+  Duration get remaining =>
+      hasRoutine ? routine!.totalDuration - elapsed : Duration.zero;
+  String get remainingString => toMinutesAndSeconds(remaining);
+
+  void _calculatePrevElapsed() {
+    _prevElapsed = Duration.zero;
+    if (isValidIndex(index)) {
+      for (int i = 0; i < index; i++) {
+        final TaskModel task = routine!.atIndex(i)!;
+        _prevElapsed += task.duration;
+      }
+    }
+    notifyListeners();
+  }
+
   DoRoutineModel skipForward({Duration startElapsed = Duration.zero}) {
     if (isValidIndex(index)) {
       _index++;
@@ -99,6 +121,10 @@ class DoRoutineModel extends ChangeNotifier {
         _countdown.clearTask();
       } else {
         _countdown.selectTask(currentTask!, startElapsed: startElapsed);
+        if (index > 0) {
+          final TaskModel prevTask = routine!.atIndex(index - 1)!;
+          _prevElapsed += prevTask.duration;
+        }
       }
       notifyListeners();
     }
@@ -107,12 +133,17 @@ class DoRoutineModel extends ChangeNotifier {
 
   DoRoutineModel skipBack({Duration offset = Duration.zero}) {
     if (isValidIndex(index)) {
-      if (index == 0) {
+      if (index == 0 || _countdown.elapsed.inSeconds > 5) {
         _countdown.restart();
       } else {
         _index--;
         final TaskModel task = currentTask!;
-        _countdown.selectTask(task, startElapsed: task.duration + offset);
+        _prevElapsed -= task.duration;
+        if (offset.isNegative) {
+          _countdown.selectTask(task, startElapsed: task.duration + offset);
+        } else {
+          _countdown.selectTask(task);
+        }
       }
       notifyListeners();
     }
@@ -143,6 +174,7 @@ class DoRoutineModel extends ChangeNotifier {
     } else if (_countdown.isDone) {
       skipForward(startElapsed: _countdown.excessSkippedPast);
     }
+    notifyListeners();
   }
 
   bool get shouldNotRender => isDone || !hasRoutine || !hasTask;

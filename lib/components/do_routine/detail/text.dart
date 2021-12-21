@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:mvp/components/do_routine/progress/progress.dart';
+import 'package:mvp/models/do_routine.dart';
+import 'package:provider/provider.dart';
 
 class DoRoutineDetailText extends StatelessWidget {
   const DoRoutineDetailText({Key? key}) : super(key: key);
@@ -19,9 +21,15 @@ class DoRoutineDetailText extends StatelessWidget {
           Padding(
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
               child: Row(children: [
-                Text('XX:XX', style: primaryTextStyle),
+                Selector<DoRoutineModel, String>(
+                    selector: (_, model) => model.elapsedString,
+                    builder: (_, String elapsed, __) =>
+                        Text(elapsed, style: primaryTextStyle)),
                 Text(' / ', style: secondaryTextStyle),
-                Text('XX:XX', style: secondaryTextStyle),
+                Selector<DoRoutineModel, String>(
+                    selector: (_, model) => model.remainingString,
+                    builder: (_, String remaining, __) =>
+                        Text(remaining, style: secondaryTextStyle)),
                 Expanded(child: Container()),
                 IconButton(
                     onPressed: () {}, icon: const Icon(Icons.favorite_border)),
