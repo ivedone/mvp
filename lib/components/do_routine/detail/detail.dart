@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'clock.dart';
+import 'controls.dart';
 
 class DoRoutineDetailWidget extends StatelessWidget {
   const DoRoutineDetailWidget({Key? key}) : super(key: key);
@@ -11,9 +12,11 @@ class DoRoutineDetailWidget extends StatelessWidget {
     return SizedBox(
         height: height,
         child: Container(
-            color: Theme.of(context).colorScheme.primaryVariant,
+            // color: Theme.of(context).colorScheme.primaryVariant,
+            color: Colors.transparent,
             child: Stack(children: [
               DoRoutineDetailClock(),
+              DoRoutineDetailControls(),
             ])));
   }
 }
