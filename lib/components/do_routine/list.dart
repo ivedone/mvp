@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:mvp/components/do_routine/task.dart';
+
 import 'package:mvp/models/do_routine.dart';
 import 'package:mvp/models/routine.dart';
+
+import 'package:mvp/components/do_routine/task.dart';
 
 class DoRoutineListWidget extends StatefulWidget {
   const DoRoutineListWidget({Key? key}) : super(key: key);
@@ -51,7 +53,7 @@ class _DoRoutineListWidgetState extends State<DoRoutineListWidget> {
             selector: (_, DoRoutineModel doRoutine) => doRoutine.index,
             builder: (BuildContext listContext, int currentIndex, __) {
               final int length = routine.length;
-              final double spacerHeight =
+              double spacerHeight =
                   2 * MediaQuery.of(listContext).size.height / 3 - 120;
               return Expanded(
                   child: ScrollablePositionedList.builder(

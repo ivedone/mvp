@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mvp/components/do_routine/list.dart';
-import 'package:mvp/models/do_routine.dart';
 import 'package:provider/provider.dart';
+
+import 'package:mvp/models/do_routine.dart';
+import 'package:mvp/components/do_routine/list.dart';
+import 'package:mvp/components/do_routine/detail.dart';
 
 class DoRoutineFullScreenModal extends StatelessWidget {
   const DoRoutineFullScreenModal({
@@ -35,16 +37,9 @@ class DoRoutineFullScreenModal extends StatelessWidget {
                 ]),
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                /// DoRoutineDetailWidget
-                /// TODO: Make DoRoutineDetailWidget resiazable as window size changes
-                SizedBox(
-                    height: MediaQuery.of(context).size.height / 3,
-                    child: Container(
-                        color: Colors.red[300],
-                        child: const Center(
-                            child: Text('DoRoutineDetailWidget')))),
-                const Expanded(child: DoRoutineListWidget()),
+              children: const [
+                DoRoutineDetailWidget(),
+                Expanded(child: DoRoutineListWidget()),
               ],
             ),
           );

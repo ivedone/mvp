@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mvp/screens/home.dart';
+import 'package:mvp/screens/do_routine.dart';
 import 'package:mvp/theme/theme.dart';
 
 class IvedoneApp extends StatelessWidget {
@@ -11,6 +11,6 @@ class IvedoneApp extends StatelessWidget {
         title: 'ivedone',
         theme: activeTheme,
         debugShowCheckedModeBanner: false,
-        home: const HomeScreen());
+        home: const DoRoutineFullScreenModal());
   }
 }
