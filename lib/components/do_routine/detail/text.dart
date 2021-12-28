@@ -30,7 +30,9 @@ class DetailText extends StatelessWidget {
                         Text(remaining, style: secondaryTextStyle)),
                 Expanded(child: Container()),
                 IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.fullscreen)),
+                    splashColor: Colors.transparent,
+                    onPressed: () {},
+                    icon: const Icon(Icons.fullscreen)),
               ])),
         ]);
   }
