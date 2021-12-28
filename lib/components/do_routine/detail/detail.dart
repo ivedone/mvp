@@ -36,6 +36,9 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
     super.initState();
     _isPaused = Provider.of<DoRoutineModel>(context, listen: false).isPaused;
     _show = _isPaused;
+    if (!_isPaused) {
+      hideInThreeSeconds();
+    }
   }
 
   @override

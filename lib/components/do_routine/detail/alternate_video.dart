@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mvp/models/countdown.dart';
-import 'package:mvp/models/do_routine.dart';
 
 import 'package:mvp/models/task.dart';
 import 'package:provider/provider.dart';
