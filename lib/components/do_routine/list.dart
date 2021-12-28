@@ -22,7 +22,7 @@ class _DoRoutineListWidgetState extends State<DoRoutineListWidget> {
   void scrollToIndex(int index) {
     itemScrollController.scrollTo(
         index: index,
-        duration: const Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 700),
         curve: Curves.easeInOutCubic);
   }
 

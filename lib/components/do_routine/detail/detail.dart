@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:mvp/components/do_routine/detail/video.dart';
+import 'package:mvp/components/do_routine/progress/progress.dart';
 import 'package:mvp/models/do_routine.dart';
 import 'package:provider/provider.dart';
 
@@ -75,29 +77,36 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
     double height = 1 * MediaQuery.of(context).size.height / 3;
     return SizedBox(
       height: height,
-      child: Stack(children: [
-        GestureDetector(
-          onTap: toggleShow,
-          child: Container(
-            color: Colors.transparent,
-            child: const DetailText(),
-          ),
-        ),
-        IgnorePointer(
-          ignoring: !show,
-          child: GestureDetector(
-            onTap: toggleShow,
-            child: AnimatedOpacity(
-              opacity: show ? 1.0 : 0.0,
-              duration: const Duration(milliseconds: 200),
-              child: Container(
-                color: Colors.transparent,
-                child: const DetailControls(),
-              ),
-            ),
-          ),
-        ),
-      ]),
+      child: Column(
+        children: [
+          Expanded(
+              child: Stack(children: [
+            const DetailVideo(),
+            GestureDetector(
+                onTap: toggleShow,
+                child: Container(
+                  color: Colors.transparent,
+                  // child: const DetailText(),
+                )),
+            IgnorePointer(
+                ignoring: !show,
+                child: GestureDetector(
+                    onTap: toggleShow,
+                    child: AnimatedOpacity(
+                        opacity: show ? 1.0 : 0.0,
+                        duration: const Duration(milliseconds: 200),
+                        child: Container(
+                            color: const Color.fromRGBO(0, 0, 0, 0.5),
+                            child: Stack(
+                              children: const [
+                                DetailText(),
+                                DetailControls(),
+                              ],
+                            )))))
+          ])),
+          const DoRoutineProgressIndicator(),
+        ],
+      ),
     );
   }
 }
