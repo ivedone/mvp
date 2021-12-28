@@ -19,19 +19,24 @@ class _DoRoutineListWidgetState extends State<DoRoutineListWidget> {
   late final int initialScrollIndex;
   late int prevIndex;
 
+  late bool wasRunning;
+
   void scrollToIndex(int index) {
     itemScrollController.scrollTo(
         index: index,
-        duration: const Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 700),
         curve: Curves.easeInOutCubic);
   }
 
   @override
   void initState() {
     super.initState();
-    final int index = Provider.of<DoRoutineModel>(context, listen: false).index;
-    initialScrollIndex = index;
+    final DoRoutineModel doRoutine =
+        Provider.of<DoRoutineModel>(context, listen: false);
+    final int index = doRoutine.index;
     prevIndex = index;
+    initialScrollIndex = index;
+    wasRunning = doRoutine.isRunning;
   }
 
   @override
@@ -42,7 +47,10 @@ class _DoRoutineListWidgetState extends State<DoRoutineListWidget> {
     if (doRoutine.isValidIndex(index) && prevIndex != doRoutine.index) {
       scrollToIndex(index);
       prevIndex = index;
+    } else if (doRoutine.isRunning && !wasRunning) {
+      scrollToIndex(index);
     }
+    wasRunning = doRoutine.isRunning;
   }
 
   @override

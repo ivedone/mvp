@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:mvp/components/do_routine/progress/progress.dart';
 import 'package:mvp/models/do_routine.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +32,6 @@ class DetailText extends StatelessWidget {
                 IconButton(
                     onPressed: () {}, icon: const Icon(Icons.fullscreen)),
               ])),
-          const DoRoutineProgressIndicator(),
         ]);
   }
 }

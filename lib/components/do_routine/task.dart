@@ -14,10 +14,11 @@ class TaskWidget extends StatelessWidget {
   }) : super(key: key);
 
   TextStyle _getTitleStyle(TaskState taskState, ThemeData theme) {
-    if (taskState == TaskState.active) {
-      return TextStyle(color: theme.colorScheme.secondary);
-    } else {
-      return const TextStyle();
+    switch (taskState) {
+      case TaskState.active:
+        return TextStyle(color: theme.colorScheme.secondary);
+      default:
+        return const TextStyle();
     }
   }
 
