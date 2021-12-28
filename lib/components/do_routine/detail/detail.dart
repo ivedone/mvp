@@ -1,11 +1,11 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:mvp/components/do_routine/detail/video.dart';
-import 'package:mvp/components/do_routine/progress/progress.dart';
-import 'package:mvp/models/do_routine.dart';
 import 'package:provider/provider.dart';
 
+import 'package:mvp/models/do_routine.dart';
+import 'package:mvp/components/do_routine/progress/progress.dart';
+
+import 'content.dart';
 import 'text.dart';
 import 'controls.dart';
 
@@ -23,6 +23,13 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
   bool get show => _show;
   late bool _isPaused;
   bool get isPaused => _isPaused;
+
+  @override
+  void setState(VoidCallback fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
 
   @override
   void initState() {
@@ -66,7 +73,9 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
       if (show) {
         cancelTimer();
       } else {
-        hideInThreeSeconds();
+        if (!isPaused) {
+          hideInThreeSeconds();
+        }
       }
       _show = !show;
     });
@@ -81,7 +90,7 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
         children: [
           Expanded(
               child: Stack(children: [
-            const DetailVideo(),
+            const DetailContent(),
             GestureDetector(
                 onTap: toggleShow,
                 child: Container(
@@ -104,6 +113,7 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
                               ],
                             )))))
           ])),
+          const SizedBox(height: 3),
           const DoRoutineProgressIndicator(),
         ],
       ),

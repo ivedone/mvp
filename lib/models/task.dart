@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
+
 import 'package:mvp/theme/theme.dart';
 
 enum TaskState {
@@ -38,13 +40,17 @@ class TaskModel {
   final String title;
   final String? description;
   final Duration duration;
+  final File? video;
+  bool get hasVideo => video != null;
 
-  const TaskModel(
-      {this.id,
-      required this.type,
-      required this.title,
-      this.description,
-      required this.duration});
+  const TaskModel({
+    this.id,
+    required this.type,
+    required this.title,
+    this.description,
+    required this.duration,
+    this.video,
+  });
 
   factory TaskModel.work({
     int? id,
