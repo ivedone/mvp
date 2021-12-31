@@ -18,6 +18,7 @@ class CountdownModel with ChangeNotifier {
     restart();
     _task = task;
     _offset = startElapsed;
+    notifyListeners();
     return this;
   }
 

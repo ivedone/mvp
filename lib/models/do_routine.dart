@@ -14,6 +14,7 @@ class DoRoutineModel extends ChangeNotifier {
   bool get isRunning => _ticker.isActive;
   bool get isPaused => !isRunning;
   final CountdownModel _countdown;
+
   DoRoutineModel({required CountdownModel countdown}) : _countdown = countdown {
     _initTicker();
   }
@@ -36,8 +37,8 @@ class DoRoutineModel extends ChangeNotifier {
     return this;
   }
 
-  TaskModel atIndex(int i) {
-    return _routine!.atIndex(i)!;
+  TaskModel? atIndex(int i) {
+    return _routine!.atIndex(i);
   }
 
   DoRoutineModel toggle() {
