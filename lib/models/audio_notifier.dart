@@ -1,12 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:io' show Platform;
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:mvp/models/do_routine.dart';
-import 'package:mvp/models/task.dart';
 
+import 'do_routine.dart';
 import 'countdown.dart';
+import 'task.dart';
 
-class AudioNotifier {
+class AudioNotifier with ChangeNotifier {
   final DoRoutineModel _doRoutine;
   final CountdownModel _countdown;
 
@@ -25,13 +26,14 @@ class AudioNotifier {
     flutterTts.setCompletionHandler(() => _isAnnouncing = false);
     flutterTts.setCancelHandler(() => _isAnnouncing = false);
 
-    await flutterTts.awaitSpeakCompletion(true);
-    await flutterTts.setSpeechRate(0.5);
-    await flutterTts.setVolume(0.5);
-    await flutterTts.setPitch(1.5);
+    if (kIsWeb || Platform.isIOS) {
+      await flutterTts.awaitSpeakCompletion(true);
+      await flutterTts.setSpeechRate(0.5);
+      await flutterTts.setVolume(0.5);
+      await flutterTts.setPitch(1.5);
+    }
 
-    if (kIsWeb) {
-    } else if (Platform.isIOS) {
+    if (Platform.isIOS) {
       await flutterTts.setSharedInstance(true);
       await flutterTts.setIosAudioCategory(
           IosTextToSpeechAudioCategory.ambient,
@@ -54,9 +56,7 @@ class AudioNotifier {
 
   announceTask(TaskModel? task) async {
     if (!isAnnouncing && task != null) {
-      _isAnnouncing = true;
       await flutterTts.speak(task.title);
-      _isAnnouncing = false;
     }
   }
 
