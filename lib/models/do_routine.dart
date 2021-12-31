@@ -64,13 +64,14 @@ class DoRoutineModel extends ChangeNotifier {
   }
 
   DoRoutineModel clearRoutine() {
+    stop();
     _routine = null;
     notifyListeners();
     return this;
   }
 
   DoRoutineModel selectTaskAtIndex(int i,
-      {Duration startElapsed = Duration.zero}) {
+      {Duration startElapsed = Duration.zero, bool forceDontStart = false}) {
     if (isValidIndex(i)) {
       _index = i;
       _countdown.selectTask(
@@ -78,7 +79,7 @@ class DoRoutineModel extends ChangeNotifier {
         startElapsed: startElapsed,
       );
       _calculatePrevElapsed();
-      if (isPaused) start();
+      if (!forceDontStart && isPaused) start();
       notifyListeners();
     }
     return this;

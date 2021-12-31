@@ -28,8 +28,8 @@ void main() {
       expect(doRoutine.isDone, true);
     });
 
-    test('.skipBack() shuld change tasks in doRoutine and countdown', () {
-      doRoutine.selectTaskAtIndex(routine.length - 1);
+    test('.skipBack() should change tasks in doRoutine and countdown', () {
+      doRoutine.selectTaskAtIndex(routine.length - 1, forceDontStart: true);
       for (int i = routine.length - 1; i >= 0; i--) {
         expect(doRoutine.index, i);
         expect(countdown.task!, routine.atIndex(i));
@@ -41,7 +41,8 @@ void main() {
     test('.skipForward5Sec() should skip exactly 5 seconds', () {
       final TaskModel task = routine.atIndex(0)!;
       final startElapsed = task.duration - const Duration(seconds: 2);
-      doRoutine.selectTaskAtIndex(0, startElapsed: startElapsed);
+      doRoutine.selectTaskAtIndex(0,
+          startElapsed: startElapsed, forceDontStart: true);
       doRoutine.skipForward5Sec();
       const int expected = 3;
       expect(countdown.elapsed.inSeconds, expected);
@@ -51,20 +52,23 @@ void main() {
       final int lastIndex = routine.length - 1;
       final TaskModel lastTask = routine.atIndex(lastIndex)!;
       final startElapsed = lastTask.duration - const Duration(seconds: 2);
-      doRoutine.selectTaskAtIndex(
-        lastIndex,
-        startElapsed: startElapsed,
-      );
+      doRoutine.selectTaskAtIndex(lastIndex,
+          startElapsed: startElapsed, forceDontStart: true);
       doRoutine.skipForward5Sec();
       expect(doRoutine.hasTask, false);
     });
 
     test('.skipBack5Sec() should skip exactly 5 seconds', () {
       const startElapsed = Duration(seconds: 2);
-      doRoutine.selectTaskAtIndex(1, startElapsed: startElapsed);
-      doRoutine.skipBack5Sec();
-      int expected = routine.atIndex(0)!.duration.inSeconds - 3;
-      expect(countdown.elapsed.inSeconds, expected);
+      final bool hasTaskAtIndexOne = doRoutine.atIndex(1) != null;
+      expect(hasTaskAtIndexOne, true);
+      if (hasTaskAtIndexOne) {
+        doRoutine.selectTaskAtIndex(1,
+            startElapsed: startElapsed, forceDontStart: true);
+        doRoutine.skipBack5Sec();
+        int expected = routine.atIndex(0)!.duration.inSeconds - 3;
+        expect(countdown.elapsed.inSeconds, expected);
+      }
     });
   });
 }
