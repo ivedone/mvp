@@ -7,9 +7,13 @@ import 'package:mvp/util/seed.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiProvider(providers: [
-      ChangeNotifierProvider<CountdownModel>(create: (_) => CountdownModel()),
+      ChangeNotifierProvider<CountdownModel>(
+        lazy: false,
+        create: (_) => CountdownModel(),
+      ),
       ChangeNotifierProxyProvider<CountdownModel, DoRoutineModel>(
           create: (BuildContext context) {
             final CountdownModel countdown =

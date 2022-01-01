@@ -54,7 +54,7 @@ class AudioNotifier with ChangeNotifier {
   final _countdownAnnouncer = CountdownAnnouncer();
 
   onTick() {
-    if (muted) return;
+    if (muted || _doRoutine.isPaused) return;
     if (hasTask) {
       _taskAnnouncer.announceSafely(elapsed, currentTask!);
     }

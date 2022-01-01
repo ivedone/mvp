@@ -31,6 +31,17 @@ void main() {
 
     group('CountdownAnnouncer', () {
       final Announcer countdownAnnouncer = CountdownAnnouncer();
+      test('it should know when to announce', () {
+        final bool shouldAnnounce =
+            countdownAnnouncer.shouldAnnounce(countdownAnnouncer.target);
+        expect(shouldAnnounce, true);
+      });
+
+      test('it should announce', () async {
+        final bool announced = await countdownAnnouncer.announceSafely(
+            countdownAnnouncer.target, null);
+        expect(announced, true);
+      });
     });
   });
 }

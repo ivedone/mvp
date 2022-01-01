@@ -52,6 +52,7 @@ class TaskAnnouncer extends Announcer<TaskModel> {
   @override
   Future<bool> announceSafely(Duration time, TaskModel payload) async {
     if (shouldAnnounce(time)) {
+      reset();
       _isAnnouncing = true;
       if (kIsWeb || Platform.isIOS || Platform.isAndroid) {
         await _flutterTts.speak(_sentence(payload));
@@ -63,18 +64,14 @@ class TaskAnnouncer extends Announcer<TaskModel> {
   }
 
   _initFlutterTts() async {
-    _generalSettings() async {
+    if (kIsWeb) {
       await _flutterTts.awaitSpeakCompletion(true);
       await _flutterTts.setSpeechRate(0.5);
       await _flutterTts.setVolume(0.5);
       await _flutterTts.setPitch(1.2);
-    }
-
-    if (kIsWeb) {
-      await _generalSettings();
     } else {
       if (Platform.isIOS) {
-        await _generalSettings();
+        await _flutterTts.awaitSpeakCompletion(true);
         await _flutterTts.setSharedInstance(true);
         await _flutterTts.setIosAudioCategory(
             IosTextToSpeechAudioCategory.ambient,
@@ -85,6 +82,9 @@ class TaskAnnouncer extends Announcer<TaskModel> {
             ],
             IosTextToSpeechAudioMode.voicePrompt);
         await _flutterTts.setVoice({'name': 'Siri', 'locale': 'en-US'});
+        await _flutterTts.setSpeechRate(0.45);
+        await _flutterTts.setVolume(1.0);
+        await _flutterTts.setPitch(1.0);
       }
     }
   }
