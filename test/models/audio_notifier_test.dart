@@ -1,26 +1,31 @@
+import 'dart:math';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mvp/models/audio_notifier.dart';
-import 'package:mvp/models/countdown.dart';
-import 'package:mvp/models/do_routine.dart';
-import 'package:mvp/util/seed.dart';
+
+import 'package:mvp/models/audio_notifier/audio_notifier.dart';
 
 main() {
   WidgetsFlutterBinding.ensureInitialized();
   group('AudioNotifier', () {
-    final CountdownModel countdown = CountdownModel();
-    final DoRoutineModel doRoutine = DoRoutineModel(countdown: countdown)
-      ..selectRoutine(SeedRoutines.AbsInTwoWeeks);
-    final AudioNotifier audioNotifier =
-        AudioNotifier(doRoutine: doRoutine, countdown: countdown);
+    final AudioNotifier audioNotifier = AudioNotifier();
 
-    tearDown(() {
-      doRoutine.stop();
-      doRoutine.restart();
+    setUp(() async {
+      await Future.delayed(Duration.zero);
     });
 
-    test('it loads without failing', () {
-      expect(audioNotifier.shouldAnnounceTask, false);
+    test('it should load', () {
+      expect(audioNotifier.loading, false);
+    });
+
+    test('it should handle taps', () {
+      expect(audioNotifier.all, true);
+      audioNotifier.handleTap();
+      expect(audioNotifier.alertsOnly, true);
+      audioNotifier.handleTap();
+      expect(audioNotifier.muted, true);
+      audioNotifier.handleTap();
+      expect(audioNotifier.all, true);
     });
   });
 }
