@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvp/app.dart';
+import 'package:mvp/models/audio_notifier/audio_notifier.dart';
 import 'package:mvp/models/countdown.dart';
 import 'package:mvp/models/do_routine.dart';
 import 'package:mvp/util/seed.dart';
@@ -17,6 +18,7 @@ void main() {
               ..selectRoutine(SeedRoutines.AbsInTwoWeeks);
           },
           update: (_, __, DoRoutineModel? doRoutine) => doRoutine!),
+      ChangeNotifierProvider<AudioNotifier>(create: (_) => AudioNotifier()),
     ], child: const IvedoneApp()),
   );
 }

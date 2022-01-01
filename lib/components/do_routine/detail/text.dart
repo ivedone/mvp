@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mvp/components/do_routine/detail/audio_notifier_selector.dart';
 
 import 'package:mvp/models/do_routine.dart';
 import 'package:provider/provider.dart';
@@ -13,9 +14,17 @@ class DetailText extends StatelessWidget {
     final TextStyle primaryTextStyle =
         secondaryTextStyle.copyWith(color: Colors.white);
     return Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: const [
+                    AudioNotifierSelector(),
+                  ])),
+          Expanded(child: Container()),
           Padding(
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
               child: Row(children: [
