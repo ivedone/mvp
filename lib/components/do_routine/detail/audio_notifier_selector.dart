@@ -11,8 +11,6 @@ class AudioNotifierSelector extends StatelessWidget {
         return const Icon(Icons.volume_mute_rounded);
       case AudioNotifierState.all:
         return const Icon(Icons.volume_up_rounded);
-      case AudioNotifierState.alertsOnly:
-        return const Icon(Icons.volume_down_rounded);
       case AudioNotifierState.muted:
         return const Icon(Icons.volume_off_rounded);
     }

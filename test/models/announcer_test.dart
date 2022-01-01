@@ -16,13 +16,14 @@ void main() {
         await taskAnnouncer.reset();
       });
       test('it should know when to announce', () {
-        final bool shouldAnnounce = taskAnnouncer.shouldAnnounce(Duration.zero);
+        final bool shouldAnnounce =
+            taskAnnouncer.shouldAnnounce(taskAnnouncer.target);
         expect(shouldAnnounce, true);
       });
 
       test('it should announce', () async {
         final bool announced = await taskAnnouncer.announceSafely(
-            Duration.zero, SeedTasks.DeadBugs());
+            taskAnnouncer.target, SeedTasks.DeadBugs());
         expect(announced, true);
       });
     });

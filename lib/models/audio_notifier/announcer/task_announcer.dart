@@ -9,7 +9,7 @@ import 'announcer.dart';
 class TaskAnnouncer extends Announcer<TaskModel> {
   final FlutterTts _flutterTts = FlutterTts();
 
-  TaskAnnouncer() : super(target: Duration.zero) {
+  TaskAnnouncer() : super(target: const Duration(milliseconds: 250)) {
     _initFlutterTts();
   }
 
@@ -23,40 +23,68 @@ class TaskAnnouncer extends Announcer<TaskModel> {
     return isAboutTime(time, target);
   }
 
+  String _sentence(TaskModel task) {
+    final List<String> sentence = [task.title, 'for'];
+    final int minutes = task.duration.inMinutes;
+    if (minutes > 0) {
+      sentence.add(minutes.toString());
+      if (minutes == 1) {
+        sentence.add('minute');
+      } else {
+        sentence.add('minutes');
+      }
+    }
+
+    final int seconds = task.duration.inSeconds - 60 * minutes;
+    if (seconds > 0) {
+      sentence.add(seconds.toString());
+      if (seconds == 1) {
+        sentence.add('second');
+      } else {
+        sentence.add('seconds');
+      }
+    }
+
+    return sentence.join(' ');
+  }
+
   @override
   Future<bool> announceSafely(Duration time, TaskModel payload) async {
     if (shouldAnnounce(time)) {
+      _isAnnouncing = true;
       if (kIsWeb || Platform.isIOS || Platform.isAndroid) {
-        await _flutterTts.speak(payload.title);
+        await _flutterTts.speak(_sentence(payload));
       }
+      _isAnnouncing = false;
       return true;
     }
     return false;
   }
 
   _initFlutterTts() async {
-    _flutterTts.setStartHandler(() => _isAnnouncing = true);
-    _flutterTts.setCompletionHandler(() => _isAnnouncing = false);
-    _flutterTts.setCancelHandler(() => _isAnnouncing = false);
-
-    if (kIsWeb || Platform.isIOS) {
+    _generalSettings() async {
       await _flutterTts.awaitSpeakCompletion(true);
       await _flutterTts.setSpeechRate(0.5);
       await _flutterTts.setVolume(0.5);
-      await _flutterTts.setPitch(1.5);
+      await _flutterTts.setPitch(1.2);
     }
 
-    if (Platform.isIOS) {
-      await _flutterTts.setSharedInstance(true);
-      await _flutterTts.setIosAudioCategory(
-          IosTextToSpeechAudioCategory.ambient,
-          [
-            IosTextToSpeechAudioCategoryOptions.allowBluetooth,
-            IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
-            IosTextToSpeechAudioCategoryOptions.mixWithOthers
-          ],
-          IosTextToSpeechAudioMode.voicePrompt);
-      await _flutterTts.setVoice({'name': 'Siri', 'locale': 'en-US'});
+    if (kIsWeb) {
+      await _generalSettings();
+    } else {
+      if (Platform.isIOS) {
+        await _generalSettings();
+        await _flutterTts.setSharedInstance(true);
+        await _flutterTts.setIosAudioCategory(
+            IosTextToSpeechAudioCategory.ambient,
+            [
+              IosTextToSpeechAudioCategoryOptions.allowBluetooth,
+              IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
+              IosTextToSpeechAudioCategoryOptions.mixWithOthers
+            ],
+            IosTextToSpeechAudioMode.voicePrompt);
+        await _flutterTts.setVoice({'name': 'Siri', 'locale': 'en-US'});
+      }
     }
   }
 

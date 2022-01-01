@@ -18,7 +18,13 @@ void main() {
               ..selectRoutine(SeedRoutines.AbsInTwoWeeks);
           },
           update: (_, __, DoRoutineModel? doRoutine) => doRoutine!),
-      ChangeNotifierProvider<AudioNotifier>(create: (_) => AudioNotifier()),
+      ChangeNotifierProxyProvider<DoRoutineModel, AudioNotifier>(
+          create: (BuildContext context) {
+            final doRoutine =
+                Provider.of<DoRoutineModel>(context, listen: false);
+            return AudioNotifier(doRoutine: doRoutine);
+          },
+          update: (_, __, AudioNotifier? audioNotifier) => audioNotifier!),
     ], child: const IvedoneApp()),
   );
 }
