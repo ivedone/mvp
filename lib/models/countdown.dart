@@ -6,6 +6,9 @@ import 'package:mvp/util/clock_format.dart';
 class OffsetAmounts {
   static const fiveSeconds = Duration(seconds: 5);
   static const negFiveSeconds = Duration(seconds: -5);
+
+  static const tenSeconds = Duration(seconds: 10);
+  static const negTenSeconds = Duration(seconds: -10);
 }
 
 class CountdownModel with ChangeNotifier {
@@ -18,6 +21,7 @@ class CountdownModel with ChangeNotifier {
     restart();
     _task = task;
     _offset = startElapsed;
+    notifyListeners();
     return this;
   }
 
