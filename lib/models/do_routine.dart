@@ -13,9 +13,11 @@ class DoRoutineModel extends ChangeNotifier {
   late final Ticker _ticker;
   bool get isRunning => _ticker.isActive;
   bool get isPaused => !isRunning;
-  final CountdownModel _countdown;
+  final CountdownModel countdown;
 
-  DoRoutineModel({required CountdownModel countdown}) : _countdown = countdown {
+  DoRoutineModel({
+    required this.countdown,
+  }) {
     _initTicker();
   }
 
@@ -25,14 +27,14 @@ class DoRoutineModel extends ChangeNotifier {
 
   DoRoutineModel start() {
     _ticker.start();
-    _countdown.start();
+    countdown.start();
     notifyListeners();
     return this;
   }
 
   DoRoutineModel stop() {
     _ticker.stop();
-    _countdown.stop();
+    countdown.stop();
     notifyListeners();
     return this;
   }
@@ -58,7 +60,7 @@ class DoRoutineModel extends ChangeNotifier {
   DoRoutineModel selectRoutine(RoutineModel routine) {
     _routine = routine;
     _index = 0;
-    _countdown.selectTask(currentTask!);
+    countdown.selectTask(currentTask!);
     notifyListeners();
     return this;
   }
@@ -74,7 +76,7 @@ class DoRoutineModel extends ChangeNotifier {
       {Duration startElapsed = Duration.zero, bool forceDontStart = false}) {
     if (isValidIndex(i)) {
       _index = i;
-      _countdown.selectTask(
+      countdown.selectTask(
         currentTask!,
         startElapsed: startElapsed,
       );
@@ -99,7 +101,7 @@ class DoRoutineModel extends ChangeNotifier {
 
   Duration _prevElapsed = Duration.zero;
   Duration get elapsed =>
-      hasTask ? _prevElapsed + _countdown.elapsed : Duration.zero;
+      hasTask ? _prevElapsed + countdown.elapsed : Duration.zero;
   String get elapsedString => toMinutesAndSeconds(elapsed);
   Duration get remaining =>
       hasRoutine ? routine!.totalDuration - elapsed : Duration.zero;
@@ -120,9 +122,9 @@ class DoRoutineModel extends ChangeNotifier {
     if (isValidIndex(index)) {
       _index++;
       if (isDone) {
-        _countdown.clearTask();
+        countdown.clearTask();
       } else {
-        _countdown.selectTask(currentTask!, startElapsed: startElapsed);
+        countdown.selectTask(currentTask!, startElapsed: startElapsed);
         if (index > 0) {
           final TaskModel prevTask = routine!.atIndex(index - 1)!;
           _prevElapsed += prevTask.duration;
@@ -135,16 +137,16 @@ class DoRoutineModel extends ChangeNotifier {
 
   DoRoutineModel skipBack({Duration offset = Duration.zero}) {
     if (isValidIndex(index)) {
-      if (index == 0 || _countdown.elapsed.inSeconds > 5) {
-        _countdown.restart();
+      if (index == 0 || countdown.elapsed.inSeconds > 5) {
+        countdown.restart();
       } else {
         _index--;
         final TaskModel task = currentTask!;
         _prevElapsed -= task.duration;
         if (offset.isNegative) {
-          _countdown.selectTask(task, startElapsed: task.duration + offset);
+          countdown.selectTask(task, startElapsed: task.duration + offset);
         } else {
-          _countdown.selectTask(task);
+          countdown.selectTask(task);
         }
       }
       notifyListeners();
@@ -153,28 +155,28 @@ class DoRoutineModel extends ChangeNotifier {
   }
 
   DoRoutineModel skipForward5Sec() {
-    _countdown.offsetBy(OffsetAmounts.fiveSeconds);
-    while (_countdown.hasTask && _countdown.didSkipPastTask) {
-      skipForward(startElapsed: _countdown.excessSkippedPast);
+    countdown.offsetBy(OffsetAmounts.fiveSeconds);
+    while (countdown.hasTask && countdown.didSkipPastTask) {
+      skipForward(startElapsed: countdown.excessSkippedPast);
     }
     notifyListeners();
     return this;
   }
 
   DoRoutineModel skipBack5Sec() {
-    _countdown.offsetBy(OffsetAmounts.negFiveSeconds);
-    while (_countdown.hasTask && _countdown.didSkipBeforeTask) {
-      skipBack(offset: _countdown.excessSkippedBefore);
+    countdown.offsetBy(OffsetAmounts.negFiveSeconds);
+    while (countdown.hasTask && countdown.didSkipBeforeTask) {
+      skipBack(offset: countdown.excessSkippedBefore);
     }
     return this;
   }
 
   void _onTick(_) {
-    _countdown.notifyListeners();
+    countdown.notifyListeners();
     if (!hasRoutine || isDone) {
       stop();
-    } else if (_countdown.isDone) {
-      skipForward(startElapsed: _countdown.excessSkippedPast);
+    } else if (countdown.isDone) {
+      skipForward(startElapsed: countdown.excessSkippedPast);
     }
     notifyListeners();
   }
