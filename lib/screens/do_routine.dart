@@ -4,24 +4,14 @@ import 'package:provider/provider.dart';
 import 'package:mvp/models/do_routine.dart';
 import 'package:mvp/components/do_routine/list.dart';
 import 'package:mvp/components/do_routine/detail/detail.dart';
-import 'package:mvp/models/audio_notifier/audio_notifier.dart';
-import 'package:mvp/models/countdown.dart';
 
 class DoRoutineFullScreenModal extends StatelessWidget {
   const DoRoutineFullScreenModal({
     Key? key,
   }) : super(key: key);
 
-  _bypassLazyLoadingOfDependencies(BuildContext context) {
-    Provider.of<CountdownModel>(context, listen: false);
-    Provider.of<DoRoutineModel>(context, listen: false);
-    Provider.of<AudioNotifier>(context, listen: false);
-  }
-
   @override
   Widget build(BuildContext context) {
-    _bypassLazyLoadingOfDependencies(context);
-
     return Selector<DoRoutineModel, bool>(
         selector: (_, DoRoutineModel doRoutine) => !doRoutine.hasRoutine,
         builder: (context, bool shouldNotRender, _) {

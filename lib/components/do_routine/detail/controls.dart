@@ -9,9 +9,9 @@ class DetailControls extends StatelessWidget {
   List<Widget> _buttons(BuildContext context) {
     final DoRoutineModel doRoutine =
         Provider.of<DoRoutineModel>(context, listen: false);
-    final Widget skipBack5Sec = IconButton(
+    final Widget skipBack10Sec = IconButton(
         splashColor: Colors.transparent,
-        onPressed: doRoutine.skipBack5Sec,
+        onPressed: doRoutine.skipBack10Sec,
         icon: const Icon(Icons.fast_rewind));
     final Widget skipBack = IconButton(
         splashColor: Colors.transparent,
@@ -30,11 +30,11 @@ class DetailControls extends StatelessWidget {
         splashColor: Colors.transparent,
         onPressed: doRoutine.skipForward,
         icon: const Icon(Icons.skip_next));
-    final Widget skipForward5Sec = IconButton(
+    final Widget skipForward10Sec = IconButton(
         splashColor: Colors.transparent,
-        onPressed: doRoutine.skipForward5Sec,
+        onPressed: doRoutine.skipForward10Sec,
         icon: const Icon(Icons.fast_forward));
-    return [skipBack5Sec, skipBack, toggle, skipForward, skipForward5Sec];
+    return [skipBack10Sec, skipBack, toggle, skipForward, skipForward10Sec];
   }
 
   @override

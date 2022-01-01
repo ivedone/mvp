@@ -154,8 +154,8 @@ class DoRoutineModel extends ChangeNotifier {
     return this;
   }
 
-  DoRoutineModel skipForward5Sec() {
-    countdown.offsetBy(OffsetAmounts.fiveSeconds);
+  DoRoutineModel skipForward10Sec() {
+    countdown.offsetBy(OffsetAmounts.tenSeconds);
     while (countdown.hasTask && countdown.didSkipPastTask) {
       skipForward(startElapsed: countdown.excessSkippedPast);
     }
@@ -163,8 +163,8 @@ class DoRoutineModel extends ChangeNotifier {
     return this;
   }
 
-  DoRoutineModel skipBack5Sec() {
-    countdown.offsetBy(OffsetAmounts.negFiveSeconds);
+  DoRoutineModel skipBack10Sec() {
+    countdown.offsetBy(OffsetAmounts.negTenSeconds);
     while (countdown.hasTask && countdown.didSkipBeforeTask) {
       skipBack(offset: countdown.excessSkippedBefore);
     }

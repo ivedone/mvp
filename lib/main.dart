@@ -11,7 +11,6 @@ void main() {
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider<CountdownModel>(
-        lazy: false,
         create: (_) => CountdownModel(),
       ),
       ChangeNotifierProxyProvider<CountdownModel, DoRoutineModel>(
