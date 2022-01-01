@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart' show ChangeNotifier;
+import 'package:mvp/models/audio_notifier/announcer/countdown_announcer.dart';
 import 'package:mvp/models/audio_notifier/announcer/task_announcer.dart';
 import 'package:mvp/models/countdown.dart';
 import 'package:mvp/models/do_routine.dart';
@@ -50,11 +51,13 @@ class AudioNotifier with ChangeNotifier {
   }
 
   final _taskAnnouncer = TaskAnnouncer();
+  final _countdownAnnouncer = CountdownAnnouncer();
 
   onTick() {
     if (muted) return;
     if (hasTask) {
       _taskAnnouncer.announceSafely(elapsed, currentTask!);
     }
+    _countdownAnnouncer.announceSafely(remaining, null);
   }
 }

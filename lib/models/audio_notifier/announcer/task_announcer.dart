@@ -9,7 +9,7 @@ import 'announcer.dart';
 class TaskAnnouncer extends Announcer<TaskModel> {
   final FlutterTts _flutterTts = FlutterTts();
 
-  TaskAnnouncer() : super(target: const Duration(milliseconds: 250)) {
+  TaskAnnouncer() : super(target: const Duration(milliseconds: 0)) {
     _initFlutterTts();
   }
 
@@ -37,6 +37,7 @@ class TaskAnnouncer extends Announcer<TaskModel> {
 
     final int seconds = task.duration.inSeconds - 60 * minutes;
     if (seconds > 0) {
+      if (minutes > 0) sentence.add('and');
       sentence.add(seconds.toString());
       if (seconds == 1) {
         sentence.add('second');
