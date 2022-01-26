@@ -8,26 +8,15 @@ import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  final CountdownModel countdown = CountdownModel();
+  final DoRoutineModel doRoutine = DoRoutineModel(countdown: countdown)
+    ..selectRoutine(SeedRoutines.AbsInTwoWeeks);
+  final AudioNotifier audioNotifier = AudioNotifier(doRoutine: doRoutine);
   runApp(
     MultiProvider(providers: [
-      ChangeNotifierProvider<CountdownModel>(
-        create: (_) => CountdownModel(),
-      ),
-      ChangeNotifierProxyProvider<CountdownModel, DoRoutineModel>(
-          create: (BuildContext context) {
-            final CountdownModel countdown =
-                Provider.of<CountdownModel>(context, listen: false);
-            return DoRoutineModel(countdown: countdown)
-              ..selectRoutine(SeedRoutines.AbsInTwoWeeks);
-          },
-          update: (_, __, DoRoutineModel? doRoutine) => doRoutine!),
-      ChangeNotifierProxyProvider<DoRoutineModel, AudioNotifier>(
-          create: (BuildContext context) {
-            final doRoutine =
-                Provider.of<DoRoutineModel>(context, listen: false);
-            return AudioNotifier(doRoutine: doRoutine);
-          },
-          update: (_, __, AudioNotifier? audioNotifier) => audioNotifier!),
+      ChangeNotifierProvider<CountdownModel>(create: (_) => countdown),
+      ChangeNotifierProvider<DoRoutineModel>(create: (_) => doRoutine),
+      ChangeNotifierProvider<AudioNotifier>(create: (_) => audioNotifier),
     ], child: const IvedoneApp()),
   );
 }
