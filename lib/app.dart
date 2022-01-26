@@ -8,7 +8,7 @@ class IvedoneApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'ivedone',
+        title: 'Ivedone',
         theme: activeTheme,
         debugShowCheckedModeBanner: false,
         home: const HomeScreen());
