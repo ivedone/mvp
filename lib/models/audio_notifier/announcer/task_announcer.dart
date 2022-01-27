@@ -9,9 +9,7 @@ import 'announcer.dart';
 class TaskAnnouncer extends Announcer<TaskModel> {
   final FlutterTts _flutterTts = FlutterTts();
 
-  TaskAnnouncer() : super(target: const Duration(milliseconds: 0)) {
-    _initFlutterTts();
-  }
+  TaskAnnouncer() : super(target: const Duration(milliseconds: 0));
 
   bool _isAnnouncing = false;
   @override
@@ -63,7 +61,8 @@ class TaskAnnouncer extends Announcer<TaskModel> {
     return false;
   }
 
-  _initFlutterTts() async {
+  @override
+  init() async {
     if (kIsWeb) {
       await _flutterTts.awaitSpeakCompletion(true);
       await _flutterTts.setSpeechRate(0.5);

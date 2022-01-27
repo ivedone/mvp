@@ -5,10 +5,10 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:mvp/models/audio_notifier/announcer/announcer.dart';
 
 class CountdownAnnouncer extends Announcer {
-  late final AudioCache? _audioCache;
-  CountdownAnnouncer() : super(target: const Duration(seconds: 4)) {
-    _initAudioCache();
-  }
+  // mobile only
+  final AudioCache? _audioCache =
+      kIsWeb ? null : AudioCache(prefix: 'assets/audio/');
+  CountdownAnnouncer() : super(target: const Duration(seconds: 4));
 
   bool _isAnnouncing = false;
   @override
@@ -34,11 +34,11 @@ class CountdownAnnouncer extends Announcer {
   @override
   Future<void> reset() async {}
 
-  _initAudioCache() async {
+  @override
+  init() async {
     if (kIsWeb) {
     } else {
       if (Platform.isIOS) {
-        _audioCache = AudioCache(prefix: 'assets/audio/');
         await _audioCache?.load('countdown.mp3');
       }
     }

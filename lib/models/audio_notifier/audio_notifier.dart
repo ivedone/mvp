@@ -23,7 +23,7 @@ class AudioNotifier with ChangeNotifier {
     _doRoutine.addListener(() {
       onTick();
     });
-    _initState();
+    init();
   }
 
   AudioNotifierState _state = AudioNotifierState.loading;
@@ -46,8 +46,10 @@ class AudioNotifier with ChangeNotifier {
     }
   }
 
-  _initState() async {
+  init() async {
     state = AudioNotifierState.all;
+    await _taskAnnouncer.init();
+    await _countdownAnnouncer.init();
   }
 
   final _taskAnnouncer = TaskAnnouncer();

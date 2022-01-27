@@ -6,12 +6,13 @@ import 'package:mvp/models/do_routine.dart';
 import 'package:mvp/util/seed.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final CountdownModel countdown = CountdownModel();
   final DoRoutineModel doRoutine = DoRoutineModel(countdown: countdown)
     ..selectRoutine(SeedRoutines.AbsInTwoWeeks);
   final AudioNotifier audioNotifier = AudioNotifier(doRoutine: doRoutine);
+  await audioNotifier.init();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<CountdownModel>(create: (_) => countdown),
     ChangeNotifierProvider<DoRoutineModel>(create: (_) => doRoutine),
