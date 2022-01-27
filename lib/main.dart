@@ -12,11 +12,9 @@ void main() {
   final DoRoutineModel doRoutine = DoRoutineModel(countdown: countdown)
     ..selectRoutine(SeedRoutines.AbsInTwoWeeks);
   final AudioNotifier audioNotifier = AudioNotifier(doRoutine: doRoutine);
-  runApp(
-    MultiProvider(providers: [
-      ChangeNotifierProvider<CountdownModel>(create: (_) => countdown),
-      ChangeNotifierProvider<DoRoutineModel>(create: (_) => doRoutine),
-      ChangeNotifierProvider<AudioNotifier>(create: (_) => audioNotifier),
-    ], child: const IvedoneApp()),
-  );
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider<CountdownModel>(create: (_) => countdown),
+    ChangeNotifierProvider<DoRoutineModel>(create: (_) => doRoutine),
+    ChangeNotifierProvider<AudioNotifier>(create: (_) => audioNotifier),
+  ], child: const IvedoneApp()));
 }
