@@ -55,7 +55,7 @@ class DetailControlsWidget extends StatelessWidget {
         icon: const Icon(Icons.fast_rewind));
     final Widget skipBack = IconButton(
         onPressed: doRoutine.skipBack, icon: const Icon(Icons.skip_previous));
-    const Widget toggle = ToggleButton(size: 35);
+    const Widget toggle = ToggleButton(size: 35, hideSplash: false);
     final Widget skipForward = IconButton(
         onPressed: doRoutine.skipForward, icon: const Icon(Icons.skip_next));
     final Widget skipForward10Sec = IconButton(

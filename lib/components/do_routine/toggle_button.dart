@@ -5,7 +5,9 @@ import 'package:mvp/services/do_routine.dart';
 
 class ToggleButton extends StatefulWidget {
   final double? size;
-  const ToggleButton({Key? key, this.size}) : super(key: key);
+  final bool hideSplash;
+  const ToggleButton({Key? key, this.size, this.hideSplash = true})
+      : super(key: key);
 
   @override
   _ToggleButtonState createState() => _ToggleButtonState();
@@ -57,8 +59,8 @@ class _ToggleButtonState extends State<ToggleButton>
   @override
   Widget build(BuildContext context) {
     return IconButton(
-        highlightColor: Colors.transparent,
-        splashColor: Colors.transparent,
+        highlightColor: widget.hideSplash ? Colors.transparent : null,
+        splashColor: widget.hideSplash ? Colors.transparent : null,
         onPressed: toggle,
         icon: AnimatedIcon(
             size: widget.size,
