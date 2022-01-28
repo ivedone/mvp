@@ -8,6 +8,8 @@ import 'audio_notifier_selector.dart';
 
 class DetailControlsWidget extends StatelessWidget {
   const DetailControlsWidget({Key? key}) : super(key: key);
+  final double smButtonSize = 28;
+  final double lgButtonSize = 65;
 
   @override
   Widget build(BuildContext context) {
@@ -21,28 +23,35 @@ class DetailControlsWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _padding(
-                Row(mainAxisAlignment: MainAxisAlignment.end, children: const [
-              AudioNotifierSelector(),
+            _padding(Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+              AudioNotifierSelector(size: smButtonSize),
             ])),
-            _padding(Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: _buttons(context),
+            _padding(SizedBox(
+              height: 100,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: _buttons(context),
+              ),
             )),
-            _padding(Row(children: [
-              Selector<DoRoutineModel, String>(
-                  selector: (_, model) => model.elapsedString,
-                  builder: (_, String elapsed, __) =>
-                      Text(elapsed, style: primaryTextStyle)),
-              Text(' / ', style: secondaryTextStyle),
-              Selector<DoRoutineModel, String>(
-                  selector: (_, model) => model.remainingString,
-                  builder: (_, String remaining, __) =>
-                      Text(remaining, style: secondaryTextStyle)),
-              Expanded(child: Container()),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.fullscreen)),
-            ])),
+            _padding(SizedBox(
+              child: Row(children: [
+                Selector<DoRoutineModel, String>(
+                    selector: (_, model) => model.elapsedString,
+                    builder: (_, String elapsed, __) =>
+                        Text(elapsed, style: primaryTextStyle)),
+                Text(' / ', style: secondaryTextStyle),
+                Selector<DoRoutineModel, String>(
+                    selector: (_, model) => model.remainingString,
+                    builder: (_, String remaining, __) =>
+                        Text(remaining, style: secondaryTextStyle)),
+                Expanded(child: Container()),
+                IconButton(
+                    iconSize: smButtonSize,
+                    onPressed: () {},
+                    icon: const Icon(Icons.fullscreen)),
+              ]),
+            )),
           ]),
     );
   }
@@ -50,18 +59,20 @@ class DetailControlsWidget extends StatelessWidget {
   List<Widget> _buttons(BuildContext context) {
     final DoRoutineModel doRoutine =
         Provider.of<DoRoutineModel>(context, listen: false);
-    final Widget skipBack10Sec = IconButton(
-        onPressed: doRoutine.skipBack10Sec,
-        icon: const Icon(Icons.fast_rewind));
     final Widget skipBack = IconButton(
-        onPressed: doRoutine.skipBack, icon: const Icon(Icons.skip_previous));
-    const Widget toggle = ToggleButton(size: 35, hideSplash: false);
+        iconSize: smButtonSize,
+        onPressed: doRoutine.skipBack,
+        icon: const Icon(Icons.skip_previous));
+    final Widget toggle = ToggleButton(size: lgButtonSize, hideSplash: false);
     final Widget skipForward = IconButton(
-        onPressed: doRoutine.skipForward, icon: const Icon(Icons.skip_next));
-    final Widget skipForward10Sec = IconButton(
-        onPressed: doRoutine.skipForward10Sec,
-        icon: const Icon(Icons.fast_forward));
-    return [skipBack10Sec, skipBack, toggle, skipForward, skipForward10Sec];
+        iconSize: smButtonSize,
+        onPressed: doRoutine.skipForward,
+        icon: const Icon(Icons.skip_next));
+    return [
+      Expanded(child: skipBack),
+      Expanded(child: toggle),
+      Expanded(child: skipForward),
+    ];
   }
 
   Widget _padding(Widget child) {

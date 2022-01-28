@@ -3,16 +3,20 @@ import 'package:mvp/services/audio_notifier/audio_notifier.dart';
 import 'package:provider/provider.dart';
 
 class AudioNotifierSelector extends StatelessWidget {
-  const AudioNotifierSelector({Key? key}) : super(key: key);
+  final double? size;
+  const AudioNotifierSelector({Key? key, this.size}) : super(key: key);
 
   Icon _button(AudioNotifierState state) {
     switch (state) {
       case AudioNotifierState.loading:
-        return const Icon(Icons.volume_mute_rounded);
+        return Icon(
+          Icons.volume_mute_rounded,
+          size: size,
+        );
       case AudioNotifierState.all:
-        return const Icon(Icons.volume_up_rounded);
+        return Icon(Icons.volume_up_rounded, size: size);
       case AudioNotifierState.muted:
-        return const Icon(Icons.volume_off_rounded);
+        return Icon(Icons.volume_off_rounded, size: size);
     }
   }
 
