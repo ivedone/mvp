@@ -93,10 +93,9 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
           Expanded(
               child: Stack(children: [
             const DetailContentWidget(),
-            GestureDetector(
-                onTap: toggleShow,
-                onDoubleTap: () {},
-                onDoubleTapDown: _handleDoubleTapDown,
+            _gestureDetector(ignoreMirrorsShow: true),
+            _gestureDetector(
+                ignoreMirrorsShow: false,
                 child: AnimatedOpacity(
                   opacity: show ? 1 : 0,
                   duration: const Duration(milliseconds: 200),
@@ -109,6 +108,19 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
         ],
       ),
     );
+  }
+
+  Widget _gestureDetector({
+    required bool ignoreMirrorsShow,
+    Widget? child,
+  }) {
+    return IgnorePointer(
+        ignoring: ignoreMirrorsShow ? show : !show,
+        child: GestureDetector(
+            onTap: toggleShow,
+            onDoubleTap: () {},
+            onDoubleTapDown: _handleDoubleTapDown,
+            child: child));
   }
 
   _handleDoubleTapDown(TapDownDetails details) {
