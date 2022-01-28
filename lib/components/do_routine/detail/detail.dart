@@ -91,19 +91,16 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
               child: Stack(children: [
             const DetailContentWidget(),
             GestureDetector(
-                onTap: toggleShow, child: Container(color: Colors.transparent)),
-            IgnorePointer(
-                ignoring: !show,
-                child: GestureDetector(
-                    onTap: toggleShow,
-                    child: AnimatedOpacity(
-                      opacity: show ? 1 : 0,
-                      duration: const Duration(milliseconds: 200),
-                      child: const DetailControlsWidget(),
-                    )))
+                onTap: toggleShow,
+                child: AnimatedOpacity(
+                  opacity: show ? 1 : 0,
+                  duration: const Duration(milliseconds: 200),
+                  child: const DetailControlsWidget(),
+                )),
           ])),
           const SizedBox(height: 3),
           const DoRoutineProgressIndicator(),
+          const SizedBox(height: 3),
         ],
       ),
     );
