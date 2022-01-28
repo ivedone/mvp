@@ -4,9 +4,9 @@ import 'package:mvp/models/countdown.dart';
 import 'package:mvp/models/task.dart';
 import 'package:provider/provider.dart';
 
-class DetailVideoAlternate extends StatelessWidget {
+class DetailAlternateText extends StatelessWidget {
   final TaskModel task;
-  const DetailVideoAlternate({
+  const DetailAlternateText({
     Key? key,
     required this.task,
   }) : super(key: key);

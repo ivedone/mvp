@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mvp/components/do_routine/detail/alternate_video.dart';
-import 'package:mvp/components/do_routine/detail/video.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mvp/models/do_routine.dart';
 import 'package:mvp/models/task.dart';
+
+import 'detail_video.dart';
+import 'detail_alternate_text.dart';
 
 class DetailContent extends StatelessWidget {
   const DetailContent({Key? key}) : super(key: key);
@@ -14,13 +15,14 @@ class DetailContent extends StatelessWidget {
     return Selector<DoRoutineModel, TaskModel?>(
         selector: (_, DoRoutineModel model) => model.currentTask,
         builder: (_, TaskModel? task, __) {
+          /// TODO: resolve no task behavior such as completion and no routine selected
           if (task == null) {
             return const Center(child: Text('No task selected'));
           }
           if (task.hasVideo) {
             return DetailVideo(task: task);
           } else {
-            return DetailVideoAlternate(task: task);
+            return DetailAlternateText(task: task);
           }
         });
   }

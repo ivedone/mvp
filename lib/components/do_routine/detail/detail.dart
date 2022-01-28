@@ -5,9 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:mvp/models/do_routine.dart';
 import 'package:mvp/components/do_routine/progress/progress.dart';
 
-import 'content.dart';
-import 'text.dart';
-import 'controls.dart';
+import 'detail_content.dart';
+import 'detail_controls.dart';
 
 class DoRoutineDetailWidget extends StatefulWidget {
   const DoRoutineDetailWidget({Key? key}) : super(key: key);
@@ -36,9 +35,6 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
     super.initState();
     _isPaused = Provider.of<DoRoutineModel>(context, listen: false).isPaused;
     _show = _isPaused;
-    if (!_isPaused) {
-      hideInThreeSeconds();
-    }
   }
 
   @override
@@ -95,26 +91,15 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
               child: Stack(children: [
             const DetailContent(),
             GestureDetector(
-                onTap: toggleShow,
-                child: Container(
-                  color: Colors.transparent,
-                  // child: const DetailText(),
-                )),
+                onTap: toggleShow, child: Container(color: Colors.transparent)),
             IgnorePointer(
                 ignoring: !show,
                 child: GestureDetector(
                     onTap: toggleShow,
                     child: AnimatedOpacity(
-                        opacity: show ? 1.0 : 0.0,
+                        opacity: show ? 1 : 0,
                         duration: const Duration(milliseconds: 200),
-                        child: Container(
-                            color: const Color.fromRGBO(0, 0, 0, 0.5),
-                            child: Stack(
-                              children: const [
-                                DetailText(),
-                                DetailControls(),
-                              ],
-                            )))))
+                        child: const DetailControlsWidget())))
           ])),
           const SizedBox(height: 3),
           const DoRoutineProgressIndicator(),
