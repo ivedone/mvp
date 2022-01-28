@@ -3,15 +3,15 @@ import 'package:provider/provider.dart';
 
 import 'package:mvp/services/do_routine.dart';
 
-class ControlPanelToggleButton extends StatefulWidget {
-  const ControlPanelToggleButton({Key? key}) : super(key: key);
+class ToggleButton extends StatefulWidget {
+  final double? size;
+  const ToggleButton({Key? key, this.size}) : super(key: key);
 
   @override
-  _ControlPanelToggleButtonState createState() =>
-      _ControlPanelToggleButtonState();
+  _ToggleButtonState createState() => _ToggleButtonState();
 }
 
-class _ControlPanelToggleButtonState extends State<ControlPanelToggleButton>
+class _ToggleButtonState extends State<ToggleButton>
     with SingleTickerProviderStateMixin {
   late final bool wasPausedOnInit;
   late bool wasPausedLastFrame;
@@ -61,6 +61,7 @@ class _ControlPanelToggleButtonState extends State<ControlPanelToggleButton>
         splashColor: Colors.transparent,
         onPressed: toggle,
         icon: AnimatedIcon(
+            size: widget.size,
             icon: wasPausedOnInit
                 ? AnimatedIcons.play_pause
                 : AnimatedIcons.pause_play,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mvp/services/do_routine.dart';
+import 'package:mvp/components/do_routine/toggle_button.dart';
 
 import 'audio_notifier_selector.dart';
 
@@ -54,14 +55,7 @@ class DetailControlsWidget extends StatelessWidget {
         icon: const Icon(Icons.fast_rewind));
     final Widget skipBack = IconButton(
         onPressed: doRoutine.skipBack, icon: const Icon(Icons.skip_previous));
-    final Widget toggle = IconButton(
-        iconSize: 35,
-        onPressed: doRoutine.toggle,
-        icon: Selector<DoRoutineModel, bool>(
-            selector: (_, DoRoutineModel model) => model.isPaused,
-            builder: (_, bool isPaused, __) => isPaused
-                ? const Icon(Icons.play_arrow)
-                : const Icon(Icons.pause)));
+    const Widget toggle = ToggleButton(size: 35);
     final Widget skipForward = IconButton(
         onPressed: doRoutine.skipForward, icon: const Icon(Icons.skip_next));
     final Widget skipForward10Sec = IconButton(

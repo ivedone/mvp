@@ -4,10 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:mvp/screens/do_routine.dart';
 import 'package:mvp/services/do_routine.dart';
 import 'package:mvp/components/do_routine/progress/progress.dart';
+import 'package:mvp/components/do_routine/toggle_button.dart';
 
 import 'thumbnail.dart';
 import 'text.dart';
-import 'toggle.dart';
 
 class ControlPanelWidget extends StatelessWidget {
   const ControlPanelWidget({Key? key}) : super(key: key);
@@ -36,7 +36,7 @@ class ControlPanelWidget extends StatelessWidget {
                           child: Row(children: const [
                         ControlPanelThumbnail(),
                         ControlPanelText(),
-                        ControlPanelToggleButton(),
+                        ToggleButton(),
                       ])),
                       _divider(context),
                     ])),
