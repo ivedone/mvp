@@ -11,15 +11,6 @@ class DetailVideoAlternate extends StatelessWidget {
     required this.task,
   }) : super(key: key);
 
-  String getState(TaskModel task) {
-    switch (task.type) {
-      case TaskType.rest:
-        return 'Take a break';
-      case TaskType.work:
-        return 'Go!';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final TextStyle stateStyle =
@@ -40,7 +31,7 @@ class DetailVideoAlternate extends StatelessWidget {
                       builder: (_, String remaining, __) {
                         return Text(remaining, style: remainingStyle);
                       })),
-              Center(child: Text(getState(task), style: stateStyle)),
+              Center(child: Text(task.title, style: stateStyle)),
             ]));
   }
 }
