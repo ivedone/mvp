@@ -2,7 +2,7 @@ import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:audioplayers/audioplayers.dart';
 
-import 'package:mvp/models/audio_notifier/announcer/announcer.dart';
+import 'package:mvp/services/audio_notifier/announcer/announcer.dart';
 
 class CountdownAnnouncer extends Announcer {
   // mobile only

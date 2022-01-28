@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:mvp/models/countdown.dart';
+import 'package:mvp/services/countdown.dart';
 import 'package:mvp/models/routine.dart';
 import 'package:mvp/models/task.dart';
 import 'package:mvp/util/clock_format.dart';

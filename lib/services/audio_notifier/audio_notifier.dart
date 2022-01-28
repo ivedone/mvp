@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart' show ChangeNotifier;
-import 'package:mvp/models/audio_notifier/announcer/countdown_announcer.dart';
-import 'package:mvp/models/audio_notifier/announcer/task_announcer.dart';
-import 'package:mvp/models/countdown.dart';
-import 'package:mvp/models/do_routine.dart';
+
+import 'package:mvp/services/countdown.dart';
+import 'package:mvp/services/do_routine.dart';
 import 'package:mvp/models/task.dart';
+
+import 'announcer/countdown_announcer.dart';
+import 'announcer/task_announcer.dart';
 
 enum AudioNotifierState { loading, muted, all }
 

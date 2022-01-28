@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:mvp/models/audio_notifier/audio_notifier.dart';
-import 'package:mvp/models/countdown.dart';
-import 'package:mvp/models/do_routine.dart';
+import 'package:mvp/services/audio_notifier/audio_notifier.dart';
+import 'package:mvp/services/countdown.dart';
+import 'package:mvp/services/do_routine.dart';
 
 main() {
   WidgetsFlutterBinding.ensureInitialized();

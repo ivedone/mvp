@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mvp/models/countdown.dart';
-
-import 'package:mvp/models/task.dart';
 import 'package:provider/provider.dart';
+
+import 'package:mvp/services/countdown.dart';
+import 'package:mvp/models/task.dart';
 
 class DetailAlternateText extends StatelessWidget {
   final TaskModel task;
@@ -18,7 +18,7 @@ class DetailAlternateText extends StatelessWidget {
     final TextStyle remainingStyle =
         Theme.of(context).textTheme.headline2!.copyWith(color: Colors.white);
     final Color color = getTaskTheme(task.type).colorScheme.secondaryVariant;
-    return Container(
+    return Material(
         color: color,
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

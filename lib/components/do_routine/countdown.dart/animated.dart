@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mvp/models/do_routine.dart';
-import 'package:mvp/models/countdown.dart';
+import 'package:mvp/services/do_routine.dart';
+import 'package:mvp/services/countdown.dart';
 
 class AnimatedCountdownWidget extends StatelessWidget {
   const AnimatedCountdownWidget({Key? key}) : super(key: key);

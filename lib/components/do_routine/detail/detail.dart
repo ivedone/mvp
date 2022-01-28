@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mvp/models/do_routine.dart';
+import 'package:mvp/services/do_routine.dart';
 import 'package:mvp/components/do_routine/progress/progress.dart';
 
 import 'detail_content.dart';
@@ -89,7 +89,7 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
         children: [
           Expanded(
               child: Stack(children: [
-            const DetailContent(),
+            const DetailContentWidget(),
             GestureDetector(
                 onTap: toggleShow, child: Container(color: Colors.transparent)),
             IgnorePointer(
@@ -97,9 +97,10 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
                 child: GestureDetector(
                     onTap: toggleShow,
                     child: AnimatedOpacity(
-                        opacity: show ? 1 : 0,
-                        duration: const Duration(milliseconds: 200),
-                        child: const DetailControlsWidget())))
+                      opacity: show ? 1 : 0,
+                      duration: const Duration(milliseconds: 200),
+                      child: const DetailControlsWidget(),
+                    )))
           ])),
           const SizedBox(height: 3),
           const DoRoutineProgressIndicator(),

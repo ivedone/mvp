@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mvp/models/audio_notifier/audio_notifier.dart';
+import 'package:mvp/services/audio_notifier/audio_notifier.dart';
 import 'package:provider/provider.dart';
 
 class AudioNotifierSelector extends StatelessWidget {

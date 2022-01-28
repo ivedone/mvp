@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mvp/models/do_routine.dart';
+import 'package:mvp/services/do_routine.dart';
 import 'package:mvp/models/task.dart';
 
 import 'detail_video.dart';
 import 'detail_alternate_text.dart';
 
-class DetailContent extends StatelessWidget {
-  const DetailContent({Key? key}) : super(key: key);
+class DetailContentWidget extends StatelessWidget {
+  const DetailContentWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

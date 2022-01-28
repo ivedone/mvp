@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mvp/models/countdown.dart';
+import 'package:mvp/services/countdown.dart';
 
 import 'static_chunk.dart';
 

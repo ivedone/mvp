@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mvp/models/do_routine.dart';
+import 'package:mvp/services/do_routine.dart';
 
 class ControlPanelToggleButton extends StatefulWidget {
   const ControlPanelToggleButton({Key? key}) : super(key: key);
