@@ -12,7 +12,8 @@ abstract class Announcer<T> {
 
   bool shouldAnnounce(Duration time);
   bool get isAnnouncing;
-  Future<bool> announceSafely(Duration time, T payload);
+  Future<void> start(Duration time, T payload);
+  Future<void> stop();
 
   Future<void> reset();
 }

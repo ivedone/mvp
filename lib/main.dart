@@ -3,7 +3,7 @@ import 'package:mvp/app.dart';
 import 'package:mvp/models/audio_notifier/audio_notifier.dart';
 import 'package:mvp/models/countdown.dart';
 import 'package:mvp/models/do_routine.dart';
-import 'package:mvp/util/audio_service.dart';
+import 'package:mvp/util/audio_session.dart';
 import 'package:mvp/util/seed.dart';
 import 'package:provider/provider.dart';
 

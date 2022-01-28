@@ -19,17 +19,18 @@ class CountdownAnnouncer extends Announcer {
       !isAnnouncing && isAboutTime(time, target);
 
   @override
-  Future<bool> announceSafely(Duration time, payload) async {
+  Future<void> start(Duration time, payload) async {
     if (shouldAnnounce(time)) {
       _isAnnouncing = true;
       if (!kIsWeb && Platform.isIOS) {
         await _audioCache?.play('countdown.mp3', volume: 0.5);
       }
       _isAnnouncing = false;
-      return true;
     }
-    return false;
   }
+
+  @override
+  Future<void> stop() async {}
 
   @override
   Future<void> reset() async {}
