@@ -18,7 +18,6 @@ class _DoRoutineListWidgetState extends State<DoRoutineListWidget> {
   final ItemScrollController itemScrollController = ItemScrollController();
   late final int initialScrollIndex;
   late int prevIndex;
-
   late bool wasRunning;
 
   void scrollToIndex(int index) {

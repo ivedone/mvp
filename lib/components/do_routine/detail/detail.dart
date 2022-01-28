@@ -20,6 +20,8 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
 
   late bool _show;
   bool get show => _show;
+
+  late final DoRoutineModel doRoutineMethods;
   late bool _isPaused;
   bool get isPaused => _isPaused;
 
@@ -33,7 +35,8 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
   @override
   void initState() {
     super.initState();
-    _isPaused = Provider.of<DoRoutineModel>(context, listen: false).isPaused;
+    doRoutineMethods = Provider.of<DoRoutineModel>(context, listen: false);
+    _isPaused = doRoutineMethods.isPaused;
     _show = _isPaused;
   }
 
@@ -92,6 +95,8 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
             const DetailContentWidget(),
             GestureDetector(
                 onTap: toggleShow,
+                onDoubleTap: () {},
+                onDoubleTapDown: _handleDoubleTapDown,
                 child: AnimatedOpacity(
                   opacity: show ? 1 : 0,
                   duration: const Duration(milliseconds: 200),
@@ -104,5 +109,16 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
         ],
       ),
     );
+  }
+
+  _handleDoubleTapDown(TapDownDetails details) {
+    final double width = context.size!.width;
+    final double dx = details.localPosition.dx;
+    final isLeft = (dx / width) < 0.5;
+    if (isLeft) {
+      doRoutineMethods.skipBack10Sec();
+    } else {
+      doRoutineMethods.skipForward10Sec();
+    }
   }
 }
