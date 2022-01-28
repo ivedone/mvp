@@ -22,9 +22,9 @@ main() {
 
     test('it should handle taps', () {
       expect(audioNotifier.all, true);
-      audioNotifier.handleTap();
+      audioNotifier.toggle();
       expect(audioNotifier.muted, true);
-      audioNotifier.handleTap();
+      audioNotifier.toggle();
       expect(audioNotifier.all, true);
     });
   });

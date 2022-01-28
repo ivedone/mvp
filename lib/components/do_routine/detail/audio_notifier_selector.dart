@@ -18,16 +18,14 @@ class AudioNotifierSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final handleTap =
-        Provider.of<AudioNotifier>(context, listen: false).handleTap;
+    final toggle = Provider.of<AudioNotifier>(context, listen: false).toggle;
     return Selector<AudioNotifier, AudioNotifierState>(
-      selector: (_, AudioNotifier audioNotifier) => audioNotifier.state,
-      builder: (_, AudioNotifierState state, __) {
-        return IconButton(
-          icon: _button(state),
-          onPressed: handleTap,
-        );
-      },
-    );
+        selector: (_, AudioNotifier audioNotifier) => audioNotifier.state,
+        builder: (_, AudioNotifierState state, __) {
+          return IconButton(
+            icon: _button(state),
+            onPressed: toggle,
+          );
+        });
   }
 }

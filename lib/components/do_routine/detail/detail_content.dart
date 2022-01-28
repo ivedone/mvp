@@ -15,7 +15,6 @@ class DetailContent extends StatelessWidget {
     return Selector<DoRoutineModel, TaskModel?>(
         selector: (_, DoRoutineModel model) => model.currentTask,
         builder: (_, TaskModel? task, __) {
-          /// TODO: resolve no task behavior such as completion and no routine selected
           if (task == null) {
             return const Center(child: Text('No task selected'));
           }

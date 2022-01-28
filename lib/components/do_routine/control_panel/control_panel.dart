@@ -45,6 +45,7 @@ class ControlPanelWidget extends StatelessWidget {
                   context: context,
                   barrierDismissible: false,
                   barrierColor: Colors.transparent,
+                  barrierLabel: 'DoRoutineModal',
                   transitionDuration: const Duration(milliseconds: 250),
                   pageBuilder: (context, anim1, anim2) {
                     return Dismissible(

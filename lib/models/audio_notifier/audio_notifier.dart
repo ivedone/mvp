@@ -37,13 +37,14 @@ class AudioNotifier with ChangeNotifier {
   bool get muted => state == AudioNotifierState.muted;
   bool get all => state == AudioNotifierState.all;
 
-  handleTap() {
+  toggle() async {
     if (loading) return;
     if (muted) {
       state = AudioNotifierState.all;
     } else {
       state = AudioNotifierState.muted;
     }
+    notifyListeners();
   }
 
   init() async {
