@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart' show ChangeNotifier;
-import 'package:mvp/models/audio_notifier/announcer/countdown_announcer.dart';
-import 'package:mvp/models/audio_notifier/announcer/task_announcer.dart';
-import 'package:mvp/models/countdown.dart';
-import 'package:mvp/models/do_routine.dart';
+
+import 'package:mvp/services/countdown.dart';
+import 'package:mvp/services/do_routine.dart';
 import 'package:mvp/models/task.dart';
+
+import 'announcer/countdown_announcer.dart';
+import 'announcer/task_announcer.dart';
 
 enum AudioNotifierState { loading, muted, all }
 
@@ -23,7 +25,7 @@ class AudioNotifier with ChangeNotifier {
     _doRoutine.addListener(() {
       onTick();
     });
-    _initState();
+    init();
   }
 
   AudioNotifierState _state = AudioNotifierState.loading;
@@ -37,17 +39,20 @@ class AudioNotifier with ChangeNotifier {
   bool get muted => state == AudioNotifierState.muted;
   bool get all => state == AudioNotifierState.all;
 
-  handleTap() {
+  toggle() async {
     if (loading) return;
     if (muted) {
       state = AudioNotifierState.all;
     } else {
       state = AudioNotifierState.muted;
     }
+    notifyListeners();
   }
 
-  _initState() async {
+  init() async {
     state = AudioNotifierState.all;
+    await _taskAnnouncer.init();
+    await _countdownAnnouncer.init();
   }
 
   final _taskAnnouncer = TaskAnnouncer();
@@ -56,8 +61,8 @@ class AudioNotifier with ChangeNotifier {
   onTick() {
     if (muted || _doRoutine.isPaused) return;
     if (hasTask) {
-      _taskAnnouncer.announceSafely(elapsed, currentTask!);
+      _taskAnnouncer.start(elapsed, currentTask!);
     }
-    _countdownAnnouncer.announceSafely(remaining, null);
+    _countdownAnnouncer.start(remaining, null);
   }
 }

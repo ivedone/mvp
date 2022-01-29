@@ -1,10 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:mvp/models/audio_notifier/announcer/announcer.dart';
-import 'package:mvp/models/audio_notifier/announcer/countdown_announcer.dart';
-import 'package:mvp/models/audio_notifier/announcer/task_announcer.dart';
-import 'package:mvp/util/seed.dart';
+import 'package:mvp/services/audio_notifier/announcer/announcer.dart';
+import 'package:mvp/services/audio_notifier/announcer/countdown_announcer.dart';
+import 'package:mvp/services/audio_notifier/announcer/task_announcer.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,12 +20,6 @@ void main() {
             taskAnnouncer.shouldAnnounce(taskAnnouncer.target);
         expect(shouldAnnounce, true);
       });
-
-      test('it should announce', () async {
-        final bool announced = await taskAnnouncer.announceSafely(
-            taskAnnouncer.target, SeedTasks.DeadBugs());
-        expect(announced, true);
-      });
     });
 
     group('CountdownAnnouncer', () {
@@ -35,12 +28,6 @@ void main() {
         final bool shouldAnnounce =
             countdownAnnouncer.shouldAnnounce(countdownAnnouncer.target);
         expect(shouldAnnounce, true);
-      });
-
-      test('it should announce', () async {
-        final bool announced = await countdownAnnouncer.announceSafely(
-            countdownAnnouncer.target, null);
-        expect(announced, true);
       });
     });
   });

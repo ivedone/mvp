@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mvp/components/do_routine/countdown.dart/animated.dart';
-import 'package:mvp/components/do_routine/countdown.dart/static.dart';
+
 import 'package:mvp/models/task.dart';
+
+import 'animated.dart';
+import 'static.dart';
 
 class CountdownWidget extends StatelessWidget {
   final Duration duration;

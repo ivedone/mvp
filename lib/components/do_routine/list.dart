@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import 'package:mvp/models/do_routine.dart';
+import 'package:mvp/services/do_routine.dart';
 import 'package:mvp/models/routine.dart';
 
 import 'package:mvp/components/do_routine/task.dart';
@@ -18,7 +18,6 @@ class _DoRoutineListWidgetState extends State<DoRoutineListWidget> {
   final ItemScrollController itemScrollController = ItemScrollController();
   late final int initialScrollIndex;
   late int prevIndex;
-
   late bool wasRunning;
 
   void scrollToIndex(int index) {

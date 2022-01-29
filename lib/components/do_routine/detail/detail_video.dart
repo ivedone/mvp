@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
-import 'package:mvp/models/do_routine.dart';
+import 'package:mvp/services/do_routine.dart';
 import 'package:mvp/models/task.dart';
 
 class DetailVideo extends StatefulWidget {

@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wakelock/wakelock.dart';
 
-import 'package:mvp/models/do_routine.dart';
+import 'package:mvp/services/do_routine.dart';
 import 'package:mvp/components/do_routine/list.dart';
 import 'package:mvp/components/do_routine/detail/detail.dart';
 
-class DoRoutineFullScreenModal extends StatelessWidget {
-  const DoRoutineFullScreenModal({
-    Key? key,
-  }) : super(key: key);
+class DoRoutineFullScreenModal extends StatefulWidget {
+  const DoRoutineFullScreenModal({Key? key}) : super(key: key);
+
+  @override
+  _DoRoutineFullScreenModalState createState() =>
+      _DoRoutineFullScreenModalState();
+}
+
+class _DoRoutineFullScreenModalState extends State<DoRoutineFullScreenModal> {
+  @override
+  void initState() {
+    Wakelock.enable();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    Wakelock.disable();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

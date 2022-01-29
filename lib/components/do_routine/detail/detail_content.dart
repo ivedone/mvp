@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:mvp/components/do_routine/detail/alternate_video.dart';
-import 'package:mvp/components/do_routine/detail/video.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mvp/models/do_routine.dart';
+import 'package:mvp/services/do_routine.dart';
 import 'package:mvp/models/task.dart';
 
-class DetailContent extends StatelessWidget {
-  const DetailContent({Key? key}) : super(key: key);
+import 'detail_video.dart';
+import 'detail_alternate_text.dart';
+
+class DetailContentWidget extends StatelessWidget {
+  const DetailContentWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class DetailContent extends StatelessWidget {
           if (task.hasVideo) {
             return DetailVideo(task: task);
           } else {
-            return DetailVideoAlternate(task: task);
+            return DetailAlternateText(task: task);
           }
         });
   }

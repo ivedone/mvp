@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mvp/models/countdown.dart';
+import 'package:mvp/services/countdown.dart';
 import 'package:mvp/models/task.dart';
 import 'package:mvp/util/seed.dart';
 

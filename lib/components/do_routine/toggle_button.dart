@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:mvp/models/do_routine.dart';
+import 'package:mvp/services/do_routine.dart';
 
-class ControlPanelToggleButton extends StatefulWidget {
-  const ControlPanelToggleButton({Key? key}) : super(key: key);
+class ToggleButton extends StatefulWidget {
+  final double? size;
+  final bool hideSplash;
+  const ToggleButton({Key? key, this.size, this.hideSplash = true})
+      : super(key: key);
 
   @override
-  _ControlPanelToggleButtonState createState() =>
-      _ControlPanelToggleButtonState();
+  _ToggleButtonState createState() => _ToggleButtonState();
 }
 
-class _ControlPanelToggleButtonState extends State<ControlPanelToggleButton>
+class _ToggleButtonState extends State<ToggleButton>
     with SingleTickerProviderStateMixin {
   late final bool wasPausedOnInit;
   late bool wasPausedLastFrame;
@@ -57,10 +59,11 @@ class _ControlPanelToggleButtonState extends State<ControlPanelToggleButton>
   @override
   Widget build(BuildContext context) {
     return IconButton(
-        highlightColor: Colors.transparent,
-        splashColor: Colors.transparent,
+        highlightColor: widget.hideSplash ? Colors.transparent : null,
+        splashColor: widget.hideSplash ? Colors.transparent : null,
         onPressed: toggle,
         icon: AnimatedIcon(
+            size: widget.size,
             icon: wasPausedOnInit
                 ? AnimatedIcons.play_pause
                 : AnimatedIcons.pause_play,

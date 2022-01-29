@@ -2,13 +2,13 @@ import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:audioplayers/audioplayers.dart';
 
-import 'package:mvp/models/audio_notifier/announcer/announcer.dart';
+import 'package:mvp/services/audio_notifier/announcer/announcer.dart';
 
 class CountdownAnnouncer extends Announcer {
-  late final AudioCache? _audioCache;
-  CountdownAnnouncer() : super(target: const Duration(seconds: 4)) {
-    _initAudioCache();
-  }
+  // mobile only
+  final AudioCache? _audioCache =
+      kIsWeb ? null : AudioCache(prefix: 'assets/audio/');
+  CountdownAnnouncer() : super(target: const Duration(seconds: 4));
 
   bool _isAnnouncing = false;
   @override
@@ -19,26 +19,27 @@ class CountdownAnnouncer extends Announcer {
       !isAnnouncing && isAboutTime(time, target);
 
   @override
-  Future<bool> announceSafely(Duration time, payload) async {
+  Future<void> start(Duration time, payload) async {
     if (shouldAnnounce(time)) {
       _isAnnouncing = true;
       if (!kIsWeb && Platform.isIOS) {
         await _audioCache?.play('countdown.mp3', volume: 0.5);
       }
       _isAnnouncing = false;
-      return true;
     }
-    return false;
   }
+
+  @override
+  Future<void> stop() async {}
 
   @override
   Future<void> reset() async {}
 
-  _initAudioCache() async {
+  @override
+  init() async {
     if (kIsWeb) {
     } else {
       if (Platform.isIOS) {
-        _audioCache = AudioCache(prefix: 'assets/audio/');
         await _audioCache?.load('countdown.mp3');
       }
     }

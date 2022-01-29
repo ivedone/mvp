@@ -1,24 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:mvp/models/countdown.dart';
-
-import 'package:mvp/models/task.dart';
 import 'package:provider/provider.dart';
 
-class DetailVideoAlternate extends StatelessWidget {
+import 'package:mvp/services/countdown.dart';
+import 'package:mvp/models/task.dart';
+
+class DetailAlternateText extends StatelessWidget {
   final TaskModel task;
-  const DetailVideoAlternate({
+  const DetailAlternateText({
     Key? key,
     required this.task,
   }) : super(key: key);
-
-  String getState(TaskModel task) {
-    switch (task.type) {
-      case TaskType.rest:
-        return 'Take a break';
-      case TaskType.work:
-        return 'Go!';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +18,7 @@ class DetailVideoAlternate extends StatelessWidget {
     final TextStyle remainingStyle =
         Theme.of(context).textTheme.headline2!.copyWith(color: Colors.white);
     final Color color = getTaskTheme(task.type).colorScheme.secondaryVariant;
-    return Container(
+    return Material(
         color: color,
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -40,7 +31,7 @@ class DetailVideoAlternate extends StatelessWidget {
                       builder: (_, String remaining, __) {
                         return Text(remaining, style: remainingStyle);
                       })),
-              Center(child: Text(getState(task), style: stateStyle)),
+              Center(child: Text(task.title, style: stateStyle)),
             ]));
   }
 }
