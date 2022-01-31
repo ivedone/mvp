@@ -30,8 +30,7 @@ class _DoRoutineListWidgetState extends State<DoRoutineListWidget> {
   @override
   void initState() {
     super.initState();
-    final DoRoutineModel doRoutine =
-        Provider.of<DoRoutineModel>(context, listen: false);
+    final DoRoutine doRoutine = Provider.of<DoRoutine>(context, listen: false);
     final int index = doRoutine.index;
     prevIndex = index;
     initialScrollIndex = index;
@@ -41,7 +40,7 @@ class _DoRoutineListWidgetState extends State<DoRoutineListWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final DoRoutineModel doRoutine = Provider.of<DoRoutineModel>(context);
+    final DoRoutine doRoutine = Provider.of<DoRoutine>(context);
     final int index = doRoutine.index;
     if (doRoutine.isValidIndex(index) && prevIndex != doRoutine.index) {
       scrollToIndex(index);
@@ -54,10 +53,10 @@ class _DoRoutineListWidgetState extends State<DoRoutineListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<DoRoutineModel, RoutineModel>(
-        selector: (_, DoRoutineModel doRoutine) => doRoutine.routine!,
-        builder: (_, RoutineModel routine, __) => Selector<DoRoutineModel, int>(
-            selector: (_, DoRoutineModel doRoutine) => doRoutine.index,
+    return Selector<DoRoutine, RoutineModel>(
+        selector: (_, DoRoutine doRoutine) => doRoutine.routine!,
+        builder: (_, RoutineModel routine, __) => Selector<DoRoutine, int>(
+            selector: (_, DoRoutine doRoutine) => doRoutine.index,
             builder: (BuildContext listContext, int currentIndex, __) {
               final int length = routine.length;
               double spacerHeight =

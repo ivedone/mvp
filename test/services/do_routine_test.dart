@@ -6,9 +6,9 @@ import 'package:mvp/models/task.dart';
 import 'package:mvp/util/seed.dart';
 
 void main() {
-  group('DoRoutineModel', () {
+  group('DoRoutine', () {
     final Countdown countdown = Countdown();
-    final DoRoutineModel doRoutine = DoRoutineModel(countdown: countdown);
+    final DoRoutine doRoutine = DoRoutine(countdown: countdown);
     final RoutineModel routine = SeedRoutines.AbsInTwoWeeks;
 
     setUp(() {
@@ -51,7 +51,7 @@ void main() {
       expect(countdown.elapsed.inSeconds, expected);
     });
 
-    test('.skipForward10Sec() can complete DoRoutineModel', () {
+    test('.skipForward10Sec() can complete DoRoutine', () {
       final int lastIndex = routine.length - 1;
       final TaskModel lastTask = routine.atIndex(lastIndex)!;
       final startElapsed = lastTask.duration - const Duration(seconds: 2);

@@ -14,8 +14,7 @@ void main() async {
   final GetIt getIt = GetIt.instance;
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<Countdown>(create: (_) => getIt<Countdown>()),
-    ChangeNotifierProvider<DoRoutineModel>(
-        create: (_) => getIt<DoRoutineModel>()),
+    ChangeNotifierProvider<DoRoutine>(create: (_) => getIt<DoRoutine>()),
     ChangeNotifierProvider<AudioHandler>(create: (_) => getIt<AudioHandler>()),
   ], child: const IvedoneApp()));
 }

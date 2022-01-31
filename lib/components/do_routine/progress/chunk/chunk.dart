@@ -16,8 +16,8 @@ class ProgressChunk extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<DoRoutineModel, TaskState>(
-      selector: (_, DoRoutineModel doRoutine) {
+    return Selector<DoRoutine, TaskState>(
+      selector: (_, DoRoutine doRoutine) {
         final int currentIndex = doRoutine.index;
         return getTaskState(taskIndex, currentIndex);
       },

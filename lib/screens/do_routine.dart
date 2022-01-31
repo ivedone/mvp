@@ -29,8 +29,8 @@ class _DoRoutineFullScreenModalState extends State<DoRoutineFullScreenModal> {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<DoRoutineModel, bool>(
-        selector: (_, DoRoutineModel doRoutine) => !doRoutine.hasRoutine,
+    return Selector<DoRoutine, bool>(
+        selector: (_, DoRoutine doRoutine) => !doRoutine.hasRoutine,
         builder: (context, bool shouldNotRender, _) {
           if (shouldNotRender) return Container();
           return Scaffold(
@@ -41,8 +41,8 @@ class _DoRoutineFullScreenModalState extends State<DoRoutineFullScreenModal> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     }),
-                title: Selector<DoRoutineModel, String>(
-                    selector: (_, DoRoutineModel doRoutine) =>
+                title: Selector<DoRoutine, String>(
+                    selector: (_, DoRoutine doRoutine) =>
                         doRoutine.routine!.title,
                     builder: (BuildContext context, String title, _) => Text(
                         title,

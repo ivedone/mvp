@@ -37,14 +37,14 @@ class _DetailVideoState extends State<DetailVideo> {
       });
 
     final bool isRunning =
-        Provider.of<DoRoutineModel>(context, listen: false).isRunning;
+        Provider.of<DoRoutine>(context, listen: false).isRunning;
     update(isRunning);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final bool isRunning = Provider.of<DoRoutineModel>(context).isRunning;
+    final bool isRunning = Provider.of<DoRoutine>(context).isRunning;
     update(isRunning);
   }
 
