@@ -5,7 +5,7 @@ import 'package:mvp/models/routine.dart';
 import 'package:mvp/models/task.dart';
 import 'package:mvp/util/clock_format.dart';
 
-class DoRoutineModel extends ChangeNotifier {
+class DoRoutine extends ChangeNotifier {
   RoutineModel? _routine;
   RoutineModel? get routine => _routine;
   bool get hasRoutine => routine != null;
@@ -13,9 +13,9 @@ class DoRoutineModel extends ChangeNotifier {
   late final Ticker _ticker;
   bool get isRunning => _ticker.isActive;
   bool get isPaused => !isRunning;
-  final CountdownModel countdown;
+  final Countdown countdown;
 
-  DoRoutineModel({
+  DoRoutine({
     required this.countdown,
   }) {
     _initTicker();
@@ -25,14 +25,14 @@ class DoRoutineModel extends ChangeNotifier {
     _ticker = Ticker(_onTick);
   }
 
-  DoRoutineModel start() {
+  DoRoutine start() {
     _ticker.start();
     countdown.start();
     notifyListeners();
     return this;
   }
 
-  DoRoutineModel stop() {
+  DoRoutine stop() {
     _ticker.stop();
     countdown.stop();
     notifyListeners();
@@ -43,7 +43,7 @@ class DoRoutineModel extends ChangeNotifier {
     return _routine!.atIndex(i);
   }
 
-  DoRoutineModel toggle() {
+  DoRoutine toggle() {
     if (isRunning) {
       stop();
     } else {
@@ -52,12 +52,12 @@ class DoRoutineModel extends ChangeNotifier {
     return this;
   }
 
-  DoRoutineModel restart() {
+  DoRoutine restart() {
     selectTaskAtIndex(0);
     return this;
   }
 
-  DoRoutineModel selectRoutine(RoutineModel routine) {
+  DoRoutine selectRoutine(RoutineModel routine) {
     _routine = routine;
     _index = 0;
     countdown.selectTask(currentTask!);
@@ -65,14 +65,14 @@ class DoRoutineModel extends ChangeNotifier {
     return this;
   }
 
-  DoRoutineModel clearRoutine() {
+  DoRoutine clearRoutine() {
     stop();
     _routine = null;
     notifyListeners();
     return this;
   }
 
-  DoRoutineModel selectTaskAtIndex(int i,
+  DoRoutine selectTaskAtIndex(int i,
       {Duration startElapsed = Duration.zero, bool forceDontStart = false}) {
     if (isValidIndex(i)) {
       _index = i;
@@ -118,7 +118,7 @@ class DoRoutineModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  DoRoutineModel skipForward({Duration startElapsed = Duration.zero}) {
+  DoRoutine skipForward({Duration startElapsed = Duration.zero}) {
     if (isValidIndex(index)) {
       _index++;
       if (isDone) {
@@ -135,7 +135,7 @@ class DoRoutineModel extends ChangeNotifier {
     return this;
   }
 
-  DoRoutineModel skipBack({Duration offset = Duration.zero}) {
+  DoRoutine skipBack({Duration offset = Duration.zero}) {
     if (isValidIndex(index)) {
       if (index == 0 || countdown.elapsed.inSeconds > 5) {
         countdown.restart();
@@ -154,7 +154,7 @@ class DoRoutineModel extends ChangeNotifier {
     return this;
   }
 
-  DoRoutineModel skipForward10Sec() {
+  DoRoutine skipForward10Sec() {
     countdown.offsetBy(OffsetAmounts.tenSeconds);
     while (countdown.hasTask && countdown.didSkipPastTask) {
       skipForward(startElapsed: countdown.excessSkippedPast);
@@ -163,7 +163,7 @@ class DoRoutineModel extends ChangeNotifier {
     return this;
   }
 
-  DoRoutineModel skipBack10Sec() {
+  DoRoutine skipBack10Sec() {
     countdown.offsetBy(OffsetAmounts.negTenSeconds);
     while (countdown.hasTask && countdown.didSkipBeforeTask) {
       skipBack(offset: countdown.excessSkippedBefore);

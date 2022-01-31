@@ -17,8 +17,8 @@ class ControlPanelText extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
-                      child: Selector<DoRoutineModel, String>(
-                          selector: (_, DoRoutineModel doRoutine) =>
+                      child: Selector<DoRoutine, String>(
+                          selector: (_, DoRoutine doRoutine) =>
                               doRoutine.currentTask!.title,
                           builder: (BuildContext context, String title, __) {
                             final Color color =
@@ -27,8 +27,8 @@ class ControlPanelText extends StatelessWidget {
                                 style: textStyle.copyWith(color: color));
                           })),
                   Expanded(
-                      child: Selector<DoRoutineModel, String>(
-                          selector: (_, DoRoutineModel doRoutine) =>
+                      child: Selector<DoRoutine, String>(
+                          selector: (_, DoRoutine doRoutine) =>
                               doRoutine.routine!.creator.handle,
                           builder: (BuildContext context, String creator, __) {
                             return Text(creator, style: textStyle);

@@ -36,13 +36,13 @@ class DetailControlsWidget extends StatelessWidget {
             )),
             _padding(SizedBox(
               child: Row(children: [
-                Selector<DoRoutineModel, String>(
-                    selector: (_, model) => model.elapsedString,
+                Selector<DoRoutine, String>(
+                    selector: (_, doRoutine) => doRoutine.elapsedString,
                     builder: (_, String elapsed, __) =>
                         Text(elapsed, style: primaryTextStyle)),
                 Text(' / ', style: secondaryTextStyle),
-                Selector<DoRoutineModel, String>(
-                    selector: (_, model) => model.remainingString,
+                Selector<DoRoutine, String>(
+                    selector: (_, doRoutine) => doRoutine.remainingString,
                     builder: (_, String remaining, __) =>
                         Text(remaining, style: secondaryTextStyle)),
                 Expanded(child: Container()),
@@ -57,8 +57,7 @@ class DetailControlsWidget extends StatelessWidget {
   }
 
   List<Widget> _buttons(BuildContext context) {
-    final DoRoutineModel doRoutine =
-        Provider.of<DoRoutineModel>(context, listen: false);
+    final DoRoutine doRoutine = Provider.of<DoRoutine>(context, listen: false);
     final Widget skipBack = IconButton(
         iconSize: smButtonSize,
         onPressed: doRoutine.skipBack,

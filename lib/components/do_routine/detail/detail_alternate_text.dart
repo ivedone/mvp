@@ -25,8 +25,8 @@ class DetailAlternateText extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(
-                  child: Selector<CountdownModel, String>(
-                      selector: (_, CountdownModel countdown) =>
+                  child: Selector<Countdown, String>(
+                      selector: (_, Countdown countdown) =>
                           countdown.remainingString,
                       builder: (_, String remaining, __) {
                         return Text(remaining, style: remainingStyle);

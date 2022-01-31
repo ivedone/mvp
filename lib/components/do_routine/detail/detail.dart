@@ -21,7 +21,7 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
   late bool _showControls;
   bool get showControls => _showControls;
 
-  late final DoRoutineModel doRoutineMethods;
+  late final DoRoutine doRoutineMethods;
   late bool _isPaused;
   bool get isPaused => _isPaused;
 
@@ -35,7 +35,7 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
   @override
   void initState() {
     super.initState();
-    doRoutineMethods = Provider.of<DoRoutineModel>(context, listen: false);
+    doRoutineMethods = Provider.of<DoRoutine>(context, listen: false);
     _isPaused = doRoutineMethods.isPaused;
     _showControls = _isPaused;
   }
@@ -43,7 +43,7 @@ class _DoRoutineDetailWidgetState extends State<DoRoutineDetailWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final bool willPause = Provider.of<DoRoutineModel>(context).isPaused;
+    final bool willPause = Provider.of<DoRoutine>(context).isPaused;
     final bool didPause = willPause && willPause != isPaused;
     final bool didPlay = !willPause && willPause != isPaused;
     setState(() {

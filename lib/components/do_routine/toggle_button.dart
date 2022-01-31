@@ -23,8 +23,7 @@ class _ToggleButtonState extends State<ToggleButton>
   @override
   void initState() {
     super.initState();
-    DoRoutineModel doRoutine =
-        Provider.of<DoRoutineModel>(context, listen: false);
+    DoRoutine doRoutine = Provider.of<DoRoutine>(context, listen: false);
     _controller = AnimationController(
         duration: const Duration(milliseconds: 150), vsync: this);
     toggle = doRoutine.toggle;
@@ -34,7 +33,7 @@ class _ToggleButtonState extends State<ToggleButton>
 
   @override
   void didChangeDependencies() {
-    DoRoutineModel doRoutine = Provider.of<DoRoutineModel>(context);
+    DoRoutine doRoutine = Provider.of<DoRoutine>(context);
     if (doRoutine.isPaused != wasPausedLastFrame) {
       if (wasPausedOnInit) {
         if (doRoutine.isPaused) {

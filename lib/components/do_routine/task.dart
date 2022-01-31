@@ -24,21 +24,20 @@ class TaskWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DoRoutineModel doRoutine =
-        Provider.of<DoRoutineModel>(context, listen: false);
-    final DoRoutineModel Function(int) selectTaskAtIndex =
+    final DoRoutine doRoutine = Provider.of<DoRoutine>(context, listen: false);
+    final DoRoutine Function(int) selectTaskAtIndex =
         doRoutine.selectTaskAtIndex;
     final ThemeData theme = getTaskTheme(task.type);
     return Theme(
         data: theme,
-        child: Selector<DoRoutineModel, TaskState>(
-            selector: (_, DoRoutineModel doRoutine) =>
+        child: Selector<DoRoutine, TaskState>(
+            selector: (_, DoRoutine doRoutine) =>
                 getTaskState(taskIndex, doRoutine.index),
             builder: (_, TaskState taskState, __) {
               return InkWell(
                   onTap: () => selectTaskAtIndex(taskIndex),
-                  child: Selector<DoRoutineModel, TaskState>(
-                      selector: (_, DoRoutineModel doRoutine) {
+                  child: Selector<DoRoutine, TaskState>(
+                      selector: (_, DoRoutine doRoutine) {
                     final int currentIndex = doRoutine.index;
                     return getTaskState(taskIndex, currentIndex);
                   }, builder: (_, TaskState taskState, __) {

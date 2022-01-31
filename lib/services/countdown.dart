@@ -11,12 +11,12 @@ class OffsetAmounts {
   static const negTenSeconds = Duration(seconds: -10);
 }
 
-class CountdownModel with ChangeNotifier {
+class Countdown with ChangeNotifier {
   TaskModel? _task;
   TaskModel? get task => _task;
   bool get hasTask => task != null;
 
-  CountdownModel selectTask(TaskModel task,
+  Countdown selectTask(TaskModel task,
       {Duration startElapsed = Duration.zero}) {
     restart();
     _task = task;
@@ -25,7 +25,7 @@ class CountdownModel with ChangeNotifier {
     return this;
   }
 
-  CountdownModel clearTask() {
+  Countdown clearTask() {
     restart(stop: true);
     _task = null;
     notifyListeners();
@@ -46,19 +46,19 @@ class CountdownModel with ChangeNotifier {
 
   double get percentDone => elapsed.inMilliseconds / duration.inMilliseconds;
 
-  CountdownModel start() {
+  Countdown start() {
     stopwatch.start();
     notifyListeners();
     return this;
   }
 
-  CountdownModel stop() {
+  Countdown stop() {
     stopwatch.stop();
     notifyListeners();
     return this;
   }
 
-  CountdownModel toggle() {
+  Countdown toggle() {
     if (isRunning) {
       stop();
     } else {
@@ -67,7 +67,7 @@ class CountdownModel with ChangeNotifier {
     return this;
   }
 
-  CountdownModel restart({bool stop = false}) {
+  Countdown restart({bool stop = false}) {
     if (stop) this.stop();
     stopwatch.reset();
     _offset = Duration.zero;
@@ -75,7 +75,7 @@ class CountdownModel with ChangeNotifier {
     return this;
   }
 
-  CountdownModel complete() {
+  Countdown complete() {
     _offset += remaining;
     notifyListeners();
     return this;
@@ -89,7 +89,7 @@ class CountdownModel with ChangeNotifier {
   Duration get excessSkippedBefore =>
       didSkipBeforeTask ? elapsed : Duration.zero;
 
-  CountdownModel offsetBy(Duration offset) {
+  Countdown offsetBy(Duration offset) {
     _offset += offset;
     notifyListeners();
     return this;

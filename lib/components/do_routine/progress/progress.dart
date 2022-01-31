@@ -19,8 +19,8 @@ class DoRoutineProgressIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: _height,
-      child: Selector<DoRoutineModel, RoutineModel>(
-        selector: (_, DoRoutineModel doRoutine) => doRoutine.routine!,
+      child: Selector<DoRoutine, RoutineModel>(
+        selector: (_, DoRoutine doRoutine) => doRoutine.routine!,
         builder: (_, RoutineModel routine, __) {
           List<Widget> children = [];
           for (int i = 0; i < routine.length; i++) {

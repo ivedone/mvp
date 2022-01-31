@@ -10,8 +10,8 @@ class AnimatedProgressChunk extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<CountdownModel, double>(
-        selector: (_, CountdownModel countdown) => countdown.percentDone,
+    return Selector<Countdown, double>(
+        selector: (_, Countdown countdown) => countdown.percentDone,
         builder: (BuildContext context, double percentDone, _) {
           return StaticProgressChunk(percentDone: percentDone);
         });
