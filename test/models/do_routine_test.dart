@@ -7,7 +7,7 @@ import 'package:mvp/util/seed.dart';
 
 void main() {
   group('DoRoutineModel', () {
-    final CountdownModel countdown = CountdownModel();
+    final Countdown countdown = Countdown();
     final DoRoutineModel doRoutine = DoRoutineModel(countdown: countdown);
     final RoutineModel routine = SeedRoutines.AbsInTwoWeeks;
 

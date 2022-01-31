@@ -13,7 +13,7 @@ class DoRoutineModel extends ChangeNotifier {
   late final Ticker _ticker;
   bool get isRunning => _ticker.isActive;
   bool get isPaused => !isRunning;
-  final CountdownModel countdown;
+  final Countdown countdown;
 
   DoRoutineModel({
     required this.countdown,

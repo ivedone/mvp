@@ -7,12 +7,12 @@ import 'do_routine.dart';
 
 setUp() async {
   final GetIt getIt = GetIt.instance;
-  final CountdownModel countdown = CountdownModel();
+  final Countdown countdown = Countdown();
   final DoRoutineModel doRoutine = DoRoutineModel(countdown: countdown)
     ..selectRoutine(SeedRoutines.AbsInTwoWeeks);
   final AudioHandler audioHandler = AudioHandler();
 
-  getIt.registerSingleton<CountdownModel>(countdown);
+  getIt.registerSingleton<Countdown>(countdown);
   getIt.registerSingleton<DoRoutineModel>(doRoutine);
   getIt.registerSingleton<AudioHandler>(audioHandler);
 

@@ -4,8 +4,8 @@ import 'package:mvp/models/task.dart';
 import 'package:mvp/util/seed.dart';
 
 void main() {
-  group('CountdownModel', () {
-    final CountdownModel countdown = CountdownModel();
+  group('Countdown', () {
+    final Countdown countdown = Countdown();
     final TaskModel task = SeedTasks.DeadBugs();
 
     setUp(() {

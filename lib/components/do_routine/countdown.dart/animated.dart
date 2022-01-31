@@ -20,8 +20,9 @@ class AnimatedCountdownWidget extends StatelessWidget {
                     shape: BoxShape.circle,
                     color: Theme.of(context).colorScheme.primaryVariant,
                   ),
-                  child: Selector<CountdownModel, double>(
-                      selector: (_, CountdownModel model) => model.percentDone,
+                  child: Selector<Countdown, double>(
+                      selector: (_, Countdown countdown) =>
+                          countdown.percentDone,
                       builder: (_, percentDone, __) =>
                           CircularProgressIndicator(
                               strokeWidth: 5.0,
@@ -30,8 +31,9 @@ class AnimatedCountdownWidget extends StatelessWidget {
                               color: Theme.of(context).colorScheme.secondary,
                               backgroundColor: Colors.transparent)))),
           Center(
-              child: Selector<CountdownModel, String>(
-                  selector: (_, CountdownModel model) => model.remainingString,
+              child: Selector<Countdown, String>(
+                  selector: (_, Countdown countdown) =>
+                      countdown.remainingString,
                   builder: (_, remaining, __) => Text(remaining,
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.onSecondary)))),

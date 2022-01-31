@@ -13,8 +13,7 @@ void main() async {
   await setUp();
   final GetIt getIt = GetIt.instance;
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider<CountdownModel>(
-        create: (_) => getIt<CountdownModel>()),
+    ChangeNotifierProvider<Countdown>(create: (_) => getIt<Countdown>()),
     ChangeNotifierProvider<DoRoutineModel>(
         create: (_) => getIt<DoRoutineModel>()),
     ChangeNotifierProvider<AudioHandler>(create: (_) => getIt<AudioHandler>()),
