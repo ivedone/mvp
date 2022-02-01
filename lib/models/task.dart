@@ -59,6 +59,7 @@ class Task {
     required int seconds,
   }) {
     return Task(
+        id: id,
         title: title,
         type: TaskType.work,
         description: description,
