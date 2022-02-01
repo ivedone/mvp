@@ -18,20 +18,28 @@ class DetailAlternateText extends StatelessWidget {
     final TextStyle remainingStyle =
         Theme.of(context).textTheme.headline2!.copyWith(color: Colors.white);
     final Color color = getTaskTheme(task.type).colorScheme.secondaryVariant;
+    final hasImage = task.imageUrl != null;
     return Material(
         color: color,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Center(
-                  child: Selector<Countdown, String>(
-                      selector: (_, Countdown countdown) =>
-                          countdown.remainingString,
-                      builder: (_, String remaining, __) {
-                        return Text(remaining, style: remainingStyle);
-                      })),
-              Center(child: Text(task.title, style: stateStyle)),
-            ]));
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+              image: hasImage
+                  ? DecorationImage(
+                      image: NetworkImage(task.imageUrl!), fit: BoxFit.cover)
+                  : null),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                    child: Selector<Countdown, String>(
+                        selector: (_, Countdown countdown) =>
+                            countdown.remainingString,
+                        builder: (_, String remaining, __) {
+                          return Text(remaining, style: remainingStyle);
+                        })),
+                Center(child: Text(task.title, style: stateStyle)),
+              ]),
+        ));
   }
 }
