@@ -7,9 +7,8 @@ Task fakeTask({int? id}) {
   final faker = Faker();
 
   var sport = faker.sport.name();
-  var job = faker.job.title();
-  var vehicle = faker.vehicle.model();
-  var title = '$sport $job $vehicle';
+  var dish = faker.food.dish();
+  var title = '$sport $dish';
 
   final description = faker.lorem.words(3 + Random().nextInt(5)).join(' ');
   final seconds = 15 * (1 + Random().nextInt(4));

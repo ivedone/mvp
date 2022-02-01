@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mvp/components/bottom_navbar.dart';
 import 'package:mvp/components/do_routine/control_panel/control_panel.dart';
+import 'package:mvp/components/profile/grid.dart';
 import 'package:mvp/components/profile/header/header.dart';
-import 'package:mvp/models/repos/users.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -26,18 +26,20 @@ class _ProfileScreenState extends State<ProfileScreen>
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-          title:
-              Text('@willliazz', style: Theme.of(context).textTheme.bodyText1)),
+          title: Text('@creator', style: Theme.of(context).textTheme.subtitle1),
+          actions: [
+            IconButton(onPressed: () {}, icon: const Icon(Icons.more_horiz))
+          ]),
       body: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         const HeaderWidget(),
         TabBar(controller: _controller, tabs: const [
           Tab(icon: Icon(Icons.grid_on_rounded)),
-          Tab(icon: Icon(Icons.library_books_outlined)),
+          Tab(icon: Icon(Icons.favorite)),
         ]),
         Expanded(
             child: TabBarView(controller: _controller, children: const [
-          Center(child: Text('Grid')),
-          Center(child: Text('Library')),
+          RoutineGridWidget(),
+          Material(color: Colors.red, child: Center(child: Text('Library'))),
         ])),
         const ControlPanelWidget(),
       ]),

@@ -13,18 +13,17 @@ class HeaderWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            ProfilePictureWidget(),
-            const Expanded(
-                child: TextBlurbWidget(title: 'Routines', number: 3)),
-            const Expanded(
-                child: TextBlurbWidget(title: 'Followers', number: 51)),
-            const Expanded(
-                child: TextBlurbWidget(title: 'Following', number: 13)),
-          ],
-        ),
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ProfilePictureWidget(),
+              const Expanded(
+                  child: TextBlurbWidget(title: 'Routines', number: 3)),
+              const Expanded(
+                  child: TextBlurbWidget(title: 'Followers', number: 51)),
+              const Expanded(
+                  child: TextBlurbWidget(title: 'Following', number: 13)),
+            ]),
       ),
     );
   }

@@ -32,7 +32,7 @@ Routine fakeRoutine() {
 class FakeLocalRoutines implements LocalRoutines {
   final List<Routine> _routines = [];
   FakeLocalRoutines() {
-    for (int i = 0; i < 15; i++) {
+    for (int i = 0; i < 11; i++) {
       _routines.add(fakeRoutine());
     }
   }

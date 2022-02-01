@@ -6,6 +6,7 @@ import 'package:mvp/models/user.dart';
 
 @immutable
 class Routine {
+  String get key => '$title-$creator-${totalDuration.inSeconds}';
   final User creator;
   final String title;
   final List<Task> _tasks;
