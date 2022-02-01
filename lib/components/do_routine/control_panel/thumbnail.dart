@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mvp/util/image_cache.dart';
 import 'package:provider/provider.dart';
 
 import 'package:mvp/services/do_routine.dart';
@@ -16,13 +17,10 @@ class ControlPanelThumbnail extends StatelessWidget {
         final bool hasImage = task.imageUrl != null;
         return AspectRatio(
             aspectRatio: 1 / 1,
-            child: DecoratedBox(
-                decoration: BoxDecoration(
-                    image: hasImage
-                        ? DecorationImage(
-                            image: CachedNetworkImageProvider(task.imageUrl!))
-                        : null,
-                    color: getTaskTheme(task.type).colorScheme.secondary)));
+            child: Material(
+              color: getTaskTheme(task.type).colorScheme.secondary,
+              child: hasImage ? cachedImage(context, task.imageUrl!) : null,
+            ));
       },
     );
   }

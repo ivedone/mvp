@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mvp/models/routine.dart';
 import 'package:mvp/services/do_routine.dart';
 import 'package:mvp/services/profile.dart';
 import 'package:mvp/util/clock_format.dart';
+import 'package:mvp/util/image_cache.dart';
 import 'package:provider/provider.dart';
 
 class RoutineGridWidget extends StatelessWidget {
@@ -54,12 +56,14 @@ class RoutineGridItem extends StatelessWidget {
                     colors: [Colors.black, Colors.white],
                     tileMode: TileMode.mirror)
                 .createShader(bounds),
-            child: DecoratedBox(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: CachedNetworkImageProvider(routine.imageUrl!),
-                        fit: BoxFit.cover)),
-                child: Container())),
+            child: AspectRatio(
+                aspectRatio: 1,
+                child: Container(
+                    color: Theme.of(context).colorScheme.primaryVariant,
+                    child: CachedNetworkImage(
+                        imageUrl: routine.imageUrl!,
+                        placeholder: (_, url) =>
+                            cachedImage(context, routine.imageUrl!))))),
         Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
           Padding(
               padding: const EdgeInsets.all(8.0),
