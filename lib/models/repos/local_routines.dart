@@ -28,7 +28,10 @@ Routine fakeRoutine() {
   final title = '$name $sport';
 
   final imageUrl = faker.image.image(
-      height: 1080, width: 1080, keywords: ['sport', 'athlete', 'fitness']);
+      height: 1080,
+      width: 1080,
+      keywords: ['sport', 'athlete', 'fitness'],
+      random: true);
 
   return Routine(creator: user, title: title, tasks: tasks, imageUrl: imageUrl);
 }

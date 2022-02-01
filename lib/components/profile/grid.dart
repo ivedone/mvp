@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mvp/models/repos/local_routines.dart';
 import 'package:mvp/models/routine.dart';
 import 'package:mvp/services/do_routine.dart';
+import 'package:mvp/services/profile.dart';
+import 'package:provider/provider.dart';
 
 class RoutineGridWidget extends StatelessWidget {
   const RoutineGridWidget({Key? key}) : super(key: key);
@@ -10,13 +11,18 @@ class RoutineGridWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Routine> routines = GetIt.I<LocalRoutines>().getAll();
-
-    return GridView.count(
-      crossAxisCount: 2,
-      mainAxisSpacing: gap,
-      crossAxisSpacing: gap,
-      children: _children(routines),
+    return Material(
+      color: Theme.of(context).colorScheme.background,
+      child: Selector<Profile, List<Routine>>(
+          selector: (_, profile) => profile.myRoutines(),
+          builder: (_, routines, __) {
+            return GridView.count(
+              crossAxisCount: 2,
+              mainAxisSpacing: gap,
+              crossAxisSpacing: gap,
+              children: _children(routines),
+            );
+          }),
     );
   }
 
@@ -39,7 +45,7 @@ class RoutineGridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => selectRoutine(routine),
-      child: Container(
+      child: Ink(
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: NetworkImage(routine.imageUrl!), fit: BoxFit.cover)),
