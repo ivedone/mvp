@@ -12,8 +12,9 @@ import 'text.dart';
 class ControlPanelWidget extends StatelessWidget {
   const ControlPanelWidget({Key? key}) : super(key: key);
 
-  Widget _divider(BuildContext context) =>
-      Divider(height: 2, color: Theme.of(context).colorScheme.primary);
+  Widget _divider(BuildContext context) => Material(
+      color: Theme.of(context).colorScheme.primary,
+      child: const Divider(height: 2));
 
   @override
   Widget build(BuildContext context) {
