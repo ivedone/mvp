@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 @immutable
-class UserModel {
+class User {
   final String username;
   String get handle => '@$username';
-  const UserModel({
+  const User({
     required this.username,
   });
 }

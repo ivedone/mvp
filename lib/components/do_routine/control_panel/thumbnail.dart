@@ -9,9 +9,9 @@ class ControlPanelThumbnail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<DoRoutine, TaskModel>(
+    return Selector<DoRoutine, Task>(
       selector: (_, DoRoutine model) => model.currentTask!,
-      builder: (_, TaskModel task, __) {
+      builder: (_, Task task, __) {
         return AspectRatio(
             aspectRatio: 1 / 1,
             child: DecoratedBox(

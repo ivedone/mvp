@@ -6,7 +6,7 @@ import 'package:mvp/models/task.dart';
 
 class TaskWidget extends StatelessWidget {
   final int taskIndex;
-  final TaskModel task;
+  final Task task;
   const TaskWidget({
     Key? key,
     required this.taskIndex,

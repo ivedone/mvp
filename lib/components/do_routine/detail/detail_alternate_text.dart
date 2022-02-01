@@ -5,7 +5,7 @@ import 'package:mvp/services/countdown.dart';
 import 'package:mvp/models/task.dart';
 
 class DetailAlternateText extends StatelessWidget {
-  final TaskModel task;
+  final Task task;
   const DetailAlternateText({
     Key? key,
     required this.task,

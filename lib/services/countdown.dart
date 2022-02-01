@@ -12,12 +12,11 @@ class OffsetAmounts {
 }
 
 class Countdown with ChangeNotifier {
-  TaskModel? _task;
-  TaskModel? get task => _task;
+  Task? _task;
+  Task? get task => _task;
   bool get hasTask => task != null;
 
-  Countdown selectTask(TaskModel task,
-      {Duration startElapsed = Duration.zero}) {
+  Countdown selectTask(Task task, {Duration startElapsed = Duration.zero}) {
     restart();
     _task = task;
     _offset = startElapsed;

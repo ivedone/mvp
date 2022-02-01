@@ -6,7 +6,7 @@ import 'package:mvp/services/do_routine.dart';
 import 'package:mvp/models/task.dart';
 
 class DetailVideo extends StatefulWidget {
-  final TaskModel task;
+  final Task task;
   const DetailVideo({
     Key? key,
     required this.task,
