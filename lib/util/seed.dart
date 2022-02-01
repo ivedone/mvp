@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, constant_identifier_names
 
+import 'package:faker/faker.dart';
 import 'package:mvp/models/routine.dart';
 import 'package:mvp/models/task.dart';
 import 'package:mvp/models/user.dart';
@@ -48,4 +49,25 @@ class SeedRoutines {
       title: 'Abs In Two Weeks',
       creator: SeedUsers.ChloeTing,
       tasks: BuildTasks.AbsInTwoWeeks());
+}
+
+final List<String> _imageKeywords = [
+  'sport',
+  'athlete',
+  'fitness',
+  'NBA',
+  'HIIT',
+  'exercise',
+  'influencer'
+];
+
+String fakeImageUrl() {
+  final faker = Faker();
+  _imageKeywords.shuffle();
+  final imageUrl = faker.image.image(
+      height: 1080,
+      width: 1080,
+      keywords: _imageKeywords.sublist(2),
+      random: true);
+  return imageUrl;
 }

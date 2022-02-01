@@ -5,20 +5,11 @@ import 'package:mvp/models/repos/tasks.dart';
 import 'package:mvp/models/repos/users.dart';
 import 'package:mvp/models/routine.dart';
 import 'package:mvp/models/task.dart';
+import 'package:mvp/util/seed.dart';
 
 abstract class LocalRoutines {
   List<Routine> getAll();
 }
-
-final List<String> _keywords = [
-  'sport',
-  'athlete',
-  'fitness',
-  'NBA',
-  'HIIT',
-  'exercise',
-  'influencer'
-];
 
 Routine fakeRoutine() {
   var length = 3 + Random().nextInt(12);
@@ -37,12 +28,8 @@ Routine fakeRoutine() {
   final sport = faker.sport.name();
   final title = '$name $sport';
 
-  _keywords.shuffle();
-
-  final imageUrl = faker.image.image(
-      height: 1080, width: 1080, keywords: _keywords.sublist(2), random: true);
-
-  return Routine(creator: user, title: title, tasks: tasks, imageUrl: imageUrl);
+  return Routine(
+      creator: user, title: title, tasks: tasks, imageUrl: fakeImageUrl());
 }
 
 class FakeLocalRoutines implements LocalRoutines {

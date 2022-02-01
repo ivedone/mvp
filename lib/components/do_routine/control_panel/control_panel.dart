@@ -22,7 +22,7 @@ class ControlPanelWidget extends StatelessWidget {
     if (shouldNotRender) return Container();
 
     return SizedBox(
-        height: 50,
+        height: 60,
         child: GestureDetector(
             child: DecoratedBox(
                 decoration: BoxDecoration(
@@ -30,14 +30,14 @@ class ControlPanelWidget extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const DoRoutineProgressIndicator(),
-                      _divider(context),
                       Expanded(
                           child: Row(children: const [
                         ControlPanelThumbnail(),
                         ControlPanelText(),
-                        ToggleButton(),
+                        ToggleButton(size: 30),
                       ])),
+                      _divider(context),
+                      const DoRoutineProgressIndicator(),
                       _divider(context),
                     ])),
             onTap: () {

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:faker/faker.dart';
 import 'package:mvp/models/task.dart';
+import 'package:mvp/util/seed.dart';
 
 Task fakeTask({int? id}) {
   final faker = Faker();
@@ -14,7 +15,11 @@ Task fakeTask({int? id}) {
   final seconds = 15 * (1 + Random().nextInt(4));
 
   return Task.work(
-      id: id, title: title, description: description, seconds: seconds);
+      id: id,
+      title: title,
+      description: description,
+      seconds: seconds,
+      imageUrl: fakeImageUrl());
 }
 
 Task fakeRest({int? id}) {

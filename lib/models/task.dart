@@ -40,6 +40,7 @@ class Task {
   final String title;
   final String? description;
   final Duration duration;
+  final String? imageUrl;
   final File? video;
   bool get hasVideo => video != null;
 
@@ -49,6 +50,7 @@ class Task {
     required this.title,
     this.description,
     required this.duration,
+    this.imageUrl,
     this.video,
   });
 
@@ -57,13 +59,15 @@ class Task {
     required String title,
     String? description,
     required int seconds,
+    String? imageUrl,
   }) {
     return Task(
         id: id,
         title: title,
         type: TaskType.work,
         description: description,
-        duration: Duration(seconds: seconds));
+        duration: Duration(seconds: seconds),
+        imageUrl: imageUrl);
   }
 
   factory Task.rest({
