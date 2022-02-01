@@ -6,8 +6,8 @@ import 'package:mvp/models/task.dart';
 import 'package:mvp/util/clock_format.dart';
 
 class DoRoutine extends ChangeNotifier {
-  RoutineModel? _routine;
-  RoutineModel? get routine => _routine;
+  Routine? _routine;
+  Routine? get routine => _routine;
   bool get hasRoutine => routine != null;
 
   late final Ticker _ticker;
@@ -39,7 +39,7 @@ class DoRoutine extends ChangeNotifier {
     return this;
   }
 
-  TaskModel? atIndex(int i) {
+  Task? atIndex(int i) {
     return _routine!.atIndex(i);
   }
 
@@ -57,7 +57,7 @@ class DoRoutine extends ChangeNotifier {
     return this;
   }
 
-  DoRoutine selectRoutine(RoutineModel routine) {
+  DoRoutine selectRoutine(Routine routine) {
     _routine = routine;
     _index = 0;
     countdown.selectTask(currentTask!);
@@ -93,7 +93,7 @@ class DoRoutine extends ChangeNotifier {
   int get length => hasRoutine ? routine!.length : 0;
   bool isValidIndex(int i) => routine?.isValidIndex(i) ?? false;
   bool get hasTask => isValidIndex(index);
-  TaskModel? get currentTask => routine?.atIndex(index);
+  Task? get currentTask => routine?.atIndex(index);
   bool get isDone => index >= length;
 
   bool get isLast => isValidIndex(index) && index == length - 1;
@@ -111,7 +111,7 @@ class DoRoutine extends ChangeNotifier {
     _prevElapsed = Duration.zero;
     if (isValidIndex(index)) {
       for (int i = 0; i < index; i++) {
-        final TaskModel task = routine!.atIndex(i)!;
+        final Task task = routine!.atIndex(i)!;
         _prevElapsed += task.duration;
       }
     }
@@ -126,7 +126,7 @@ class DoRoutine extends ChangeNotifier {
       } else {
         countdown.selectTask(currentTask!, startElapsed: startElapsed);
         if (index > 0) {
-          final TaskModel prevTask = routine!.atIndex(index - 1)!;
+          final Task prevTask = routine!.atIndex(index - 1)!;
           _prevElapsed += prevTask.duration;
         }
       }
@@ -141,7 +141,7 @@ class DoRoutine extends ChangeNotifier {
         countdown.restart();
       } else {
         _index--;
-        final TaskModel task = currentTask!;
+        final Task task = currentTask!;
         _prevElapsed -= task.duration;
         if (offset.isNegative) {
           countdown.selectTask(task, startElapsed: task.duration + offset);

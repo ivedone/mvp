@@ -6,7 +6,7 @@ import 'package:mvp/util/seed.dart';
 void main() {
   group('Countdown', () {
     final Countdown countdown = Countdown();
-    final TaskModel task = SeedTasks.DeadBugs();
+    final Task task = SeedTasks.DeadBugs();
 
     setUp(() {
       countdown.selectTask(task);

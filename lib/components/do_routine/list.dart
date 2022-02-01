@@ -53,9 +53,9 @@ class _DoRoutineListWidgetState extends State<DoRoutineListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<DoRoutine, RoutineModel>(
+    return Selector<DoRoutine, Routine>(
         selector: (_, DoRoutine doRoutine) => doRoutine.routine!,
-        builder: (_, RoutineModel routine, __) => Selector<DoRoutine, int>(
+        builder: (_, Routine routine, __) => Selector<DoRoutine, int>(
             selector: (_, DoRoutine doRoutine) => doRoutine.index,
             builder: (BuildContext listContext, int currentIndex, __) {
               final int length = routine.length;

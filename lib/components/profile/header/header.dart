@@ -1,0 +1,27 @@
+import 'package:flutter/material.dart';
+import 'package:mvp/components/profile/header/blurb.dart';
+
+import 'picture.dart';
+
+class HeaderWidget extends StatelessWidget {
+  const HeaderWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 100,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: const [
+              ProfilePictureWidget(),
+              Expanded(child: TextBlurbWidget(title: 'Routines', number: 3)),
+              Expanded(child: TextBlurbWidget(title: 'Followers', number: 51)),
+              Expanded(child: TextBlurbWidget(title: 'Following', number: 13)),
+            ]),
+      ),
+    );
+  }
+}

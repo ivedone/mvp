@@ -11,10 +11,10 @@ class ControlPanelText extends StatelessWidget {
     final TextStyle textStyle = Theme.of(context).textTheme.caption!;
     return Expanded(
         child: Padding(
-            padding: const EdgeInsets.all(6.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
                       child: Selector<DoRoutine, String>(

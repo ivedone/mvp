@@ -9,7 +9,7 @@ void main() {
   group('DoRoutine', () {
     final Countdown countdown = Countdown();
     final DoRoutine doRoutine = DoRoutine(countdown: countdown);
-    final RoutineModel routine = SeedRoutines.AbsInTwoWeeks;
+    final Routine routine = SeedRoutines.AbsInTwoWeeks;
 
     setUp(() {
       doRoutine.selectRoutine(routine);
@@ -42,7 +42,7 @@ void main() {
       const int total = 10;
       const int skip = 2;
       const int rem = total - skip;
-      final TaskModel task = routine.atIndex(0)!;
+      final Task task = routine.atIndex(0)!;
       final startElapsed = task.duration - const Duration(seconds: skip);
       doRoutine.selectTaskAtIndex(0,
           startElapsed: startElapsed, forceDontStart: true);
@@ -53,7 +53,7 @@ void main() {
 
     test('.skipForward10Sec() can complete DoRoutine', () {
       final int lastIndex = routine.length - 1;
-      final TaskModel lastTask = routine.atIndex(lastIndex)!;
+      final Task lastTask = routine.atIndex(lastIndex)!;
       final startElapsed = lastTask.duration - const Duration(seconds: 2);
       doRoutine.selectTaskAtIndex(lastIndex,
           startElapsed: startElapsed, forceDontStart: true);

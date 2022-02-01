@@ -9,13 +9,17 @@ class ControlPanelThumbnail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<DoRoutine, TaskModel>(
+    return Selector<DoRoutine, Task>(
       selector: (_, DoRoutine model) => model.currentTask!,
-      builder: (_, TaskModel task, __) {
+      builder: (_, Task task, __) {
+        final bool hasImage = task.imageUrl != null;
         return AspectRatio(
             aspectRatio: 1 / 1,
             child: DecoratedBox(
                 decoration: BoxDecoration(
+                    image: hasImage
+                        ? DecorationImage(image: NetworkImage(task.imageUrl!))
+                        : null,
                     color: getTaskTheme(task.type).colorScheme.secondary)));
       },
     );

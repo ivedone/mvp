@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mvp/screens/home.dart';
+import 'package:mvp/screens/profile.dart';
 import 'package:mvp/theme/theme.dart';
 
 class IvedoneApp extends StatelessWidget {
@@ -8,9 +8,9 @@ class IvedoneApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Ivedone',
         theme: activeTheme,
-        debugShowCheckedModeBanner: false,
-        home: const HomeScreen());
+        home: const ProfileScreen());
   }
 }

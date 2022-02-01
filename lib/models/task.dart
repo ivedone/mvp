@@ -34,42 +34,47 @@ ThemeData getTaskTheme(TaskType type) {
 }
 
 @immutable
-class TaskModel {
+class Task {
   final int? id;
   final TaskType type;
   final String title;
   final String? description;
   final Duration duration;
+  final String? imageUrl;
   final File? video;
   bool get hasVideo => video != null;
 
-  const TaskModel({
+  const Task({
     this.id,
     required this.type,
     required this.title,
     this.description,
     required this.duration,
+    this.imageUrl,
     this.video,
   });
 
-  factory TaskModel.work({
+  factory Task.work({
     int? id,
     required String title,
     String? description,
     required int seconds,
+    String? imageUrl,
   }) {
-    return TaskModel(
+    return Task(
+        id: id,
         title: title,
         type: TaskType.work,
         description: description,
-        duration: Duration(seconds: seconds));
+        duration: Duration(seconds: seconds),
+        imageUrl: imageUrl);
   }
 
-  factory TaskModel.rest({
+  factory Task.rest({
     int? id,
     required seconds,
   }) {
-    return TaskModel(
+    return Task(
         id: id,
         type: TaskType.rest,
         title: 'Rest',

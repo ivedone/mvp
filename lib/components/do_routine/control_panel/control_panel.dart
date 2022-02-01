@@ -12,8 +12,9 @@ import 'text.dart';
 class ControlPanelWidget extends StatelessWidget {
   const ControlPanelWidget({Key? key}) : super(key: key);
 
-  Widget _divider(BuildContext context) =>
-      Divider(height: 2, color: Theme.of(context).colorScheme.primary);
+  Widget _divider(BuildContext context) => Material(
+      color: Theme.of(context).colorScheme.primary,
+      child: const Divider(height: 2));
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class ControlPanelWidget extends StatelessWidget {
     if (shouldNotRender) return Container();
 
     return SizedBox(
-        height: 50,
+        height: 60,
         child: GestureDetector(
             child: DecoratedBox(
                 decoration: BoxDecoration(
@@ -30,14 +31,14 @@ class ControlPanelWidget extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const DoRoutineProgressIndicator(),
-                      _divider(context),
                       Expanded(
                           child: Row(children: const [
                         ControlPanelThumbnail(),
                         ControlPanelText(),
-                        ToggleButton(),
+                        ToggleButton(size: 30),
                       ])),
+                      _divider(context),
+                      const DoRoutineProgressIndicator(),
                       _divider(context),
                     ])),
             onTap: () {
