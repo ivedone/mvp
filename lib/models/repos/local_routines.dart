@@ -10,6 +10,16 @@ abstract class LocalRoutines {
   List<Routine> getAll();
 }
 
+final List<String> _keywords = [
+  'sport',
+  'athlete',
+  'fitness',
+  'NBA',
+  'HIIT',
+  'exercise',
+  'influencer'
+];
+
 Routine fakeRoutine() {
   var length = 3 + Random().nextInt(12);
   final List<Task> tasks = [];
@@ -27,11 +37,10 @@ Routine fakeRoutine() {
   final sport = faker.sport.name();
   final title = '$name $sport';
 
+  _keywords.shuffle();
+
   final imageUrl = faker.image.image(
-      height: 1080,
-      width: 1080,
-      keywords: ['sport', 'athlete', 'fitness'],
-      random: true);
+      height: 1080, width: 1080, keywords: _keywords.sublist(2), random: true);
 
   return Routine(creator: user, title: title, tasks: tasks, imageUrl: imageUrl);
 }

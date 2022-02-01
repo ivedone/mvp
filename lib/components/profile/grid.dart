@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mvp/models/routine.dart';
 import 'package:mvp/services/do_routine.dart';
@@ -45,10 +46,17 @@ class RoutineGridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => selectRoutine(routine),
-      child: Ink(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: NetworkImage(routine.imageUrl!), fit: BoxFit.cover)),
+      child: ShaderMask(
+        shaderCallback: (Rect bounds) => const LinearGradient(
+          colors: [Colors.black, Colors.white],
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+        ).createShader(bounds),
+        child: DecoratedBox(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage(routine.imageUrl!),
+                    fit: BoxFit.cover))),
       ),
     );
   }
