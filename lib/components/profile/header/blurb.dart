@@ -13,7 +13,7 @@ class TextBlurbWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('$number', style: Theme.of(context).textTheme.headline6),
-          Text(title, style: Theme.of(context).textTheme.subtitle2),
+          Text(title, style: Theme.of(context).textTheme.bodyText2),
         ]);
   }
 }
