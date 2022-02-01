@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mvp/models/routine.dart';
@@ -56,7 +57,7 @@ class RoutineGridItem extends StatelessWidget {
             child: DecoratedBox(
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(routine.imageUrl!),
+                        image: CachedNetworkImageProvider(routine.imageUrl!),
                         fit: BoxFit.cover)),
                 child: Container())),
         Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [

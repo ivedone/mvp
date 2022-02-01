@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:mvp/services/profile.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,7 @@ class ProfilePictureWidget extends StatelessWidget {
         return CircleAvatar(
           minRadius: 50,
           maxRadius: 50,
-          backgroundImage: NetworkImage(imageUrl),
+          backgroundImage: CachedNetworkImageProvider(imageUrl),
         );
       },
     );

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,8 @@ class ControlPanelThumbnail extends StatelessWidget {
             child: DecoratedBox(
                 decoration: BoxDecoration(
                     image: hasImage
-                        ? DecorationImage(image: NetworkImage(task.imageUrl!))
+                        ? DecorationImage(
+                            image: CachedNetworkImageProvider(task.imageUrl!))
                         : null,
                     color: getTaskTheme(task.type).colorScheme.secondary)));
       },

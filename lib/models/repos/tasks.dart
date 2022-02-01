@@ -11,7 +11,7 @@ Task fakeTask({int? id}) {
   var dish = faker.food.dish();
   var title = '$sport $dish';
 
-  final description = faker.lorem.words(3 + Random().nextInt(5)).join(' ');
+  final description = faker.lorem.words(3 + Random().nextInt(10)).join(' ');
   final seconds = 15 * (1 + Random().nextInt(4));
 
   return Task.work(

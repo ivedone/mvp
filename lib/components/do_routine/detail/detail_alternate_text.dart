@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +26,8 @@ class DetailAlternateText extends StatelessWidget {
           decoration: BoxDecoration(
               image: hasImage
                   ? DecorationImage(
-                      image: NetworkImage(task.imageUrl!), fit: BoxFit.cover)
+                      image: CachedNetworkImageProvider(task.imageUrl!),
+                      fit: BoxFit.cover)
                   : null),
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
