@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mvp/models/routine.dart';
 import 'package:mvp/services/do_routine.dart';
 import 'package:mvp/services/profile.dart';
+import 'package:mvp/util/clock_format.dart';
 import 'package:provider/provider.dart';
 
 class RoutineGridWidget extends StatelessWidget {
@@ -44,20 +44,34 @@ class RoutineGridItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => selectRoutine(routine),
-      child: ShaderMask(
-        shaderCallback: (Rect bounds) => const LinearGradient(
-          colors: [Colors.black, Colors.white],
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-        ).createShader(bounds),
-        child: DecoratedBox(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(routine.imageUrl!),
-                    fit: BoxFit.cover))),
-      ),
+    return Stack(
+      children: [
+        ShaderMask(
+            shaderCallback: (Rect bounds) => const LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.center,
+                    colors: [Colors.black, Colors.white],
+                    tileMode: TileMode.mirror)
+                .createShader(bounds),
+            child: DecoratedBox(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(routine.imageUrl!),
+                        fit: BoxFit.cover)),
+                child: Container())),
+        Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(toMinutesAndSeconds(routine.totalDuration),
+                  textAlign: TextAlign.right)),
+          Expanded(child: Container()),
+          Padding(
+              padding: const EdgeInsets.all(8.0), child: Text(routine.title)),
+        ]),
+        Material(
+            color: Colors.transparent,
+            child: InkWell(onTap: () => selectRoutine(routine)))
+      ],
     );
   }
 }
