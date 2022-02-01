@@ -13,11 +13,13 @@ class Routine {
   List<Task> get tasks => UnmodifiableListView(_tasks);
   int get length => _tasks.length;
   late final Duration totalDuration;
+  final String? imageUrl;
 
   Routine({
     required this.title,
     required this.creator,
     required List<Task> tasks,
+    this.imageUrl,
   }) : _tasks = tasks {
     _initTotalDuration();
   }

@@ -13,7 +13,7 @@ class RoutineGridWidget extends StatelessWidget {
     final List<Routine> routines = GetIt.I<LocalRoutines>().getAll();
 
     return GridView.count(
-      crossAxisCount: 3,
+      crossAxisCount: 2,
       mainAxisSpacing: gap,
       crossAxisSpacing: gap,
       children: _children(routines),
@@ -39,7 +39,11 @@ class RoutineGridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => selectRoutine(routine),
-      child: Center(child: Text(routine.title)),
+      child: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage(routine.imageUrl!), fit: BoxFit.cover)),
+      ),
     );
   }
 }

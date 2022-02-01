@@ -26,7 +26,11 @@ Routine fakeRoutine() {
   final name = faker.person.name();
   final sport = faker.sport.name();
   final title = '$name $sport';
-  return Routine(creator: user, title: title, tasks: tasks);
+
+  final imageUrl = faker.image.image(
+      height: 1080, width: 1080, keywords: ['sport', 'athlete', 'fitness']);
+
+  return Routine(creator: user, title: title, tasks: tasks, imageUrl: imageUrl);
 }
 
 class FakeLocalRoutines implements LocalRoutines {
