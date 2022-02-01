@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 class User {
   final String username;
   String get handle => '@$username';
+  final String? imageUrl;
   const User({
     required this.username,
+    this.imageUrl,
   });
 }
